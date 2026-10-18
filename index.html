@@ -1,0 +1,3106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Breadfast Coffee — Recipe Helper</title>
+<style>*,:before,:after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#f1fff5;--bg2:#fff;--bg3:#e5f6eb;--bg4:#d3ebdc;--border:#d6eade;--border2:#b9d8c4;--text:#173a30;--text2:#42685a;--text3:#718f80;--text4:#92a99b;--amber:#c62b83;--amber-d:#a91e6d;--red:#c84659;--sky:#23849b;--radius:.65rem;--radius-lg:.9rem;--radius-xl:1.1rem}html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif}body{background:var(--bg);color:var(--text);overflow:hidden}.titlebar{border-bottom:1px solid var(--border);background:var(--bg2);-webkit-user-select:none;user-select:none;justify-content:space-between;align-items:center;height:36px;padding:0 12px;display:flex}.titlebar-l{color:var(--text3);align-items:center;gap:8px;font-size:12px;font-weight:600;display:flex}.titlebar-l .tb-short{display:none}.titlebar-r{gap:4px;display:flex}.tb-btn{width:24px;height:24px;color:var(--text4);cursor:pointer;background:0 0;border:0;border-radius:4px;place-items:center;display:grid}.app{flex-direction:column;height:100vh;display:flex}.main-area{flex:1;min-height:0;display:flex}.order-panel{border-right:1px solid var(--border);background:#18181b99;flex-direction:column;flex-shrink:0;width:340px;display:flex}.op-header{justify-content:space-between;align-items:center;padding:16px 16px 0;display:flex}.op-title{text-transform:uppercase;letter-spacing:.05em;color:var(--amber);font-size:11px;font-weight:700}.op-badge{background:var(--bg3);color:var(--text3);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:700}.op-list{flex:1;padding:8px 16px;overflow-y:auto}.op-empty{text-align:center;color:var(--text4);margin-top:32px;font-size:12px}.order-item{border:1px solid var(--border);border-radius:var(--radius);background:#27272a80;margin-bottom:8px;padding:10px;transition:border-color .15s}.oi-top{justify-content:space-between;align-items:flex-start;gap:8px;display:flex}.oi-name{color:var(--text);white-space:nowrap;text-overflow:ellipsis;font-size:14px;font-weight:700;overflow:hidden}.oi-sub{color:var(--text3);margin-top:2px;font-size:11px}.oi-note{color:#f59e0bb3;margin-top:2px;font-size:10px}.oi-actions{gap:2px;display:flex}.oi-act-btn{color:var(--text4);cursor:pointer;opacity:0;background:0 0;border:0;border-radius:4px;padding:4px;transition:opacity .15s,color .15s}.oi-act-btn:hover{color:var(--red)}.oi-qty{align-items:center;gap:6px;margin-top:8px;display:flex}.qty-btn{border-radius:var(--radius);background:var(--bg4);width:24px;height:24px;color:var(--text2);cursor:pointer;border:0;place-items:center;display:grid}.qty-btn:hover{background:#52525b}.qty-val{text-align:center;min-width:32px;color:var(--text2);font-size:12px;font-weight:700}.op-totals{border-top:1px solid var(--border);padding:12px 16px}.op-totals-header{justify-content:space-between;align-items:center;margin-bottom:8px;display:flex}.totals-box{border:1px solid var(--border);background:var(--bg);border-radius:var(--radius);max-height:220px;margin-bottom:12px;padding:8px;overflow-y:auto}.totals-empty{text-align:center;color:var(--text4);margin:16px 0;font-size:12px}.total-row{border-bottom:1px solid #27272a99;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;display:flex}.total-row:last-child{border-bottom:0}.total-row .tv{color:var(--sky);font-weight:700}.op-actions{gap:8px;display:flex}.op-btn{border-radius:var(--radius);background:var(--bg3);color:var(--text2);cursor:pointer;border:0;flex:1;padding:10px;font-size:12px;font-weight:700;transition:background .15s}.op-btn:hover{background:#3f3f46}.op-btn.danger{color:#fff;background:#dc2626e6;flex:none;padding:10px 12px}.menu-area{flex-direction:column;flex:1;min-width:0;display:flex}.tabs{border-bottom:1px solid var(--border);align-items:center;gap:4px;padding:12px 16px 0;display:flex}.tab{color:var(--text3);cursor:pointer;background:0 0;border:0;border-bottom:2px solid #0000;align-items:center;gap:8px;padding:10px 16px;font-size:14px;font-weight:700;transition:color .15s;display:flex}.tab:hover{color:var(--text2)}.tab.active{color:var(--amber);border-bottom-color:var(--amber)}.admin-btn{border-radius:var(--radius);background:var(--bg3);color:var(--text3);cursor:pointer;border:0;align-items:center;gap:6px;margin-left:auto;padding:6px 12px;font-size:12px;font-weight:700;transition:all .15s;display:flex}.admin-btn:hover{background:#3f3f46}.admin-btn.on{background:var(--amber);color:#18181b}.user-switcher{border-bottom:1px solid var(--border);gap:6px;padding:10px 14px;display:flex}.user-pill{border:1px solid var(--border);border-radius:var(--radius);background:var(--bg3);color:var(--text3);cursor:pointer;text-align:center;text-transform:capitalize;flex:1;padding:8px 6px;font-size:12px;font-weight:700;transition:all .15s}.user-pill:hover{color:var(--text2);background:#3f3f46}.user-pill.active{background:var(--amber);color:#18181b;border-color:var(--amber)}.search-bar{padding:12px 16px;position:relative}.search-bar svg{color:var(--text4);position:absolute;top:50%;left:28px;transform:translateY(-50%)}.search-input{border:1px solid var(--border);background:var(--bg);border-radius:var(--radius);width:100%;color:var(--text);outline:none;padding:8px 12px 8px 36px;font-size:14px}.search-input:focus{border-color:#fbbf2480}.drink-grid{flex:1;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 16px 24px;display:grid;overflow-y:auto}@media (width>=640px){.drink-grid{grid-template-columns:repeat(3,1fr)}}@media (width>=1024px){.drink-grid{grid-template-columns:repeat(4,1fr)}}@media (width>=1280px){.drink-grid{grid-template-columns:repeat(5,1fr)}}.drink-card{border:1px solid var(--border);background:var(--bg);border-radius:var(--radius-xl);text-align:center;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;padding:20px;transition:all .15s;display:flex;position:relative}.drink-card:hover{background:#27272a80;border-color:#fbbf2480}.drink-card.admin{cursor:default;border-color:#fbbf244d}.drink-badge{text-transform:uppercase;color:var(--amber);background:#fbbf241a;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700;position:absolute;top:8px;right:8px}.drink-name{color:var(--text);font-size:14px;font-weight:700}.drink-sizes{color:var(--text4);margin-top:6px;font-size:10px}.drink-nomilk{text-transform:uppercase;color:#3f3f46;margin-top:4px;font-size:9px}.admin-actions{gap:8px;margin-top:12px;display:flex}.admin-edit,.admin-del{border-radius:var(--radius);cursor:pointer;border:0;align-items:center;gap:4px;padding:6px 12px;font-size:12px;font-weight:700;display:flex}.admin-edit{background:var(--bg3);color:var(--amber)}.add-drink-btn{border-radius:var(--radius-xl);width:100%;color:var(--amber);cursor:pointer;background:#fbbf240d;border:2px dashed #fbbf2466;justify-content:center;align-items:center;gap:8px;margin-bottom:12px;padding:12px;font-size:14px;font-weight:700;transition:background .15s;display:flex}.no-results{text-align:center;color:var(--text4);grid-column:1/-1;margin-top:48px;font-size:14px}.overlay{z-index:50;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);background:#000000b3;place-items:center;display:grid;position:fixed;inset:0}.modal{border:1px solid var(--border2);background:var(--bg2);border-radius:1rem;flex-direction:column;width:100%;max-width:448px;max-height:88vh;display:flex;box-shadow:0 25px 50px -12px #00000080}.modal.pad{padding:24px}.modal-head{border-bottom:1px solid var(--border);justify-content:space-between;align-items:center;padding:20px;display:flex}.modal-title{color:var(--amber);font-size:18px;font-weight:700}.modal-close{color:var(--text4);cursor:pointer;background:0 0;border:0;border-radius:4px;padding:4px}.modal-body{flex:1;padding:20px;overflow-y:auto}.modal-foot{border-top:1px solid var(--border);gap:12px;padding:20px;display:flex}.modal-label{text-transform:uppercase;letter-spacing:.03em;color:var(--text3);margin-bottom:4px;font-size:12px;font-weight:600;display:block}.modal-input{border:1px solid var(--border2);background:var(--bg3);border-radius:var(--radius);width:100%;color:var(--text);outline:none;padding:10px 12px;font-size:14px}.modal-input:focus{border-color:#fbbf2480}.modal-input.mb{margin-bottom:16px}.btn-cancel{border:1px solid var(--border2);background:var(--bg3);border-radius:var(--radius);color:var(--text2);cursor:pointer;flex:1;padding:12px;font-size:14px;font-weight:700}.btn-confirm{border-radius:var(--radius);background:var(--amber);color:#18181b;cursor:pointer;border:0;flex:1;padding:12px;font-size:14px;font-weight:700}.btn-confirm:disabled{background:var(--bg3);color:var(--text4);cursor:not-allowed}.milk-grid{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;display:grid}.milk-btn{border:1px solid var(--border2);background:var(--bg3);border-radius:var(--radius);color:var(--text2);cursor:pointer;justify-content:center;align-items:center;gap:4px;padding:10px 8px;font-size:12px;font-weight:600;transition:all .15s;display:flex}.milk-btn:hover{border-color:var(--text4)}.milk-btn.sel{border-color:var(--amber);background:var(--amber);color:#18181b}.size-grid{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;display:grid}.size-btn{border:1px solid var(--border2);background:var(--bg3);border-radius:var(--radius);color:var(--text2);cursor:pointer;padding:10px 12px;font-size:14px;font-weight:700;transition:all .15s}.size-btn:hover{border-color:var(--text4)}.size-btn.sel{border-color:var(--amber);background:var(--amber);color:#18181b}.size-section{border:1px solid var(--border);border-radius:var(--radius-xl);background:#27272a66;margin-bottom:12px;padding:12px}.size-head,.ing-row{align-items:center;gap:8px;margin-bottom:8px;display:flex}.ing-name{flex:1}.ing-amt,.ing-unit{width:64px}.ing-del{color:var(--text4);cursor:pointer;background:0 0;border:0;border-radius:4px;padding:4px}.ing-del:hover{color:var(--red)}.add-ing-btn{color:#fbbf24cc;cursor:pointer;background:0 0;border:0;align-items:center;gap:4px;font-size:12px;font-weight:600;display:flex}.add-ing-btn:hover{color:var(--amber)}.add-size-btn{background:var(--bg3);border-radius:var(--radius);color:var(--amber);cursor:pointer;border:0;align-items:center;gap:4px;padding:4px 8px;font-size:12px;font-weight:700;display:flex}.del-size-btn{border-radius:var(--radius);color:var(--red);cursor:pointer;background:#dc262633;border:0;align-items:center;padding:8px;display:flex}.del-size-btn:hover{background:#dc26264d}.milk-toggle{border:1px solid var(--border2);background:var(--bg3);border-radius:var(--radius);cursor:pointer;align-items:center;gap:8px;margin-bottom:16px;padding:10px 12px;display:flex}.milk-toggle input{width:16px;height:16px;accent-color:var(--amber)}.modal-error{color:var(--red);margin-top:12px;font-size:14px}.modal-sub{color:var(--text4);font-size:12px}.modal-prep{gap:6px;margin-bottom:16px;display:flex}.prep-badge{color:#f59e0bcc;background:#fbbf241a;border-radius:4px;padding:2px 8px;font-size:12px}select.modal-input{cursor:pointer}.rawmat-row{align-items:center;gap:8px;margin-bottom:8px;display:flex}.rawmat-row .modal-input{flex:1}.rawmat-unit{width:72px}.rawmat-list{border:1px solid var(--border);border-radius:var(--radius-lg);max-height:260px;margin-bottom:16px;padding:8px;overflow-y:auto}.rawmat-add{border-top:1px solid var(--border);gap:8px;padding-top:12px;display:flex}.rawmat-locked{color:var(--text4);font-size:10px}.link-btn{color:#38bdf8e6;cursor:pointer;background:0 0;border:0;align-items:center;gap:4px;margin-top:4px;font-size:12px;font-weight:600;display:flex}.reset-cat-btn{color:var(--text4);cursor:pointer;background:0 0;border:0;margin-left:8px;font-size:11px}.cart-fab{z-index:40;background:var(--amber);color:#18181b;cursor:pointer;border:0;border-radius:50%;justify-content:center;align-items:center;width:56px;height:56px;display:none;position:fixed;bottom:16px;right:16px;box-shadow:0 10px 25px -5px #00000080}.cart-fab svg{width:24px;height:24px}.cart-fab-badge{background:var(--red);color:#fff;border-radius:999px;justify-content:center;align-items:center;min-width:20px;height:20px;padding:0 4px;font-size:11px;font-weight:700;display:flex;position:absolute;top:-4px;right:-4px}.cart-backdrop{z-index:45;background:#0009;display:none;position:fixed;inset:0}.cart-close-btn{color:var(--text2);margin-left:auto;display:none}@media (width<=860px){.titlebar-l{font-size:11px}.titlebar-l .tb-full{display:none}.titlebar-l .tb-short{display:inline}.main-area{position:relative;overflow:hidden}.order-panel{z-index:46;width:min(88vw,360px);max-width:360px;transition:transform .25s;position:fixed;top:0;bottom:0;right:0;transform:translate(100%);box-shadow:-10px 0 30px #00000080}.order-panel.open{transform:translate(0)}.cart-backdrop{display:block}.cart-fab{display:flex}.cart-close-btn{display:inline-flex}.menu-area{width:100%}.tabs{-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap;padding:10px 12px 0;overflow-x:auto}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap;flex:none;padding:8px 12px;font-size:13px}.admin-btn{white-space:nowrap;flex:none}.search-bar{padding:10px 12px}.drink-grid{gap:10px;padding:0 12px 90px}.drink-card{min-height:96px;padding:16px 10px}.drink-name{font-size:13px}.qty-btn,.tb-btn{width:32px;height:32px}.user-pill{padding:10px 6px;font-size:12px}.overlay{align-items:flex-end;padding:0}.modal{border-radius:1rem 1rem 0 0;width:100%;max-width:100%;max-height:92vh}.modal.pad{padding:16px}.size-grid,.milk-grid{grid-template-columns:repeat(2,1fr)}}@media (width<=420px){.drink-grid{grid-template-columns:repeat(2,1fr)!important}.op-actions{flex-wrap:wrap}.op-actions .op-btn{flex:45%}}body{background:var(--bg);color:var(--text)}.app{background:radial-gradient(ellipse at 88% 0%, #e1f9e8 0, transparent 34%), var(--bg)}.titlebar{border-bottom-color:var(--border);background:#fffffff0;height:48px;padding:0 18px;box-shadow:0 2px 12px #1b4b350a}.titlebar-l{color:var(--text);letter-spacing:-.02em;font-size:13px;font-weight:750}.titlebar-l svg{color:var(--amber)}.tb-btn{width:30px;height:30px;color:var(--text3)}.tb-btn:hover{background:var(--bg3);color:var(--text)}.tb-btn.close:hover{background:var(--red);color:#fff}.main-area{min-height:0}.order-panel{border-right-color:var(--border);background:#ffffffd1;width:360px}.user-switcher{border-bottom-color:var(--border);padding:16px 16px 12px}.user-pill{border-color:var(--border);color:var(--text3);background:#f6fff8}.user-pill:hover{border-color:var(--border2);background:var(--bg3);color:var(--text)}.user-pill.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 4px 12px #c62b832e}.op-header{padding:18px 18px 8px}.op-title{color:var(--text2);letter-spacing:.1em}.op-badge{color:var(--amber);background:#fbe9f3;padding:4px 10px}.op-list{padding:8px 16px}.op-empty{color:var(--text4)}.order-item{border-color:var(--border);border-radius:var(--radius-lg);background:#ffffffe6;padding:12px;box-shadow:0 3px 12px #173a3009}.order-item:hover{border-color:#dca4c4}.oi-name{color:var(--text)}.oi-sub{color:var(--text3)}.oi-note{color:var(--amber)}.oi-act-btn{color:var(--text4);opacity:.7}.order-item:hover .oi-act-btn{opacity:1}.oi-act-btn.edit:hover{color:var(--amber)}.qty-btn{background:var(--bg3);color:var(--text2)}.qty-btn:hover{color:var(--text);background:#d5eddf}.qty-val{color:var(--text)}.op-totals{border-top-color:var(--border);background:#f8fffac7;padding:14px 16px 16px}.totals-box{border-color:var(--border);border-radius:var(--radius-lg);background:#fff;padding:10px 12px}.totals-empty{color:var(--text4)}.total-row{border-bottom-color:#edf5ef}.total-row .tn{color:var(--text2)}.total-row .tv{color:var(--sky)}.op-btn{background:var(--bg3);color:var(--text2)}.op-btn:hover{color:var(--text);background:#d5eddf}.op-btn.danger{color:var(--red);background:#fbe9ec}.op-btn.danger:hover{background:#f4d5dc}.menu-area{background:0 0}.tabs{border-bottom-color:var(--border);background:#ffffffc7;flex-wrap:wrap;gap:7px;padding:16px 20px 12px}.tab{color:var(--text3);border:1px solid #0000;border-radius:999px;gap:7px;padding:9px 13px;font-size:13px}.tab:hover{background:var(--bg3);color:var(--text)}.tab.active{color:var(--amber);background:#fbeaf3;border-color:#f1c8dc}.admin-btn{border:1px solid var(--border);color:var(--text2);background:#fff;border-radius:999px;padding:8px 12px}.admin-btn:hover{background:var(--bg3);color:var(--text)}.admin-btn.on{border-color:var(--amber);background:var(--amber);color:#fff}.search-bar{padding:18px 20px 14px}.search-bar svg{color:var(--text4);left:34px}.search-input{border-color:var(--border);color:var(--text);background:#ffffffe0;border-radius:999px;padding:11px 16px 11px 42px;box-shadow:0 3px 12px #173a3009}.search-input::placeholder{color:var(--text4)}.search-input:focus{border-color:#d68ab2;box-shadow:0 0 0 3px #c62b8317}.drink-grid{align-content:start;gap:14px;padding:4px 20px 28px}.drink-card{border-color:var(--border);border-radius:var(--radius-xl);background:#ffffffe6;min-height:132px;padding:22px 16px;box-shadow:0 5px 18px #173a300b}.drink-card:hover{background:#fff;border-color:#d68ab2;transform:translateY(-2px);box-shadow:0 10px 24px #77365b1a}.drink-card:active{transform:scale(.985)}.drink-card.admin{background:#ffffffe6;border-color:#e8c8d9}.drink-card.admin:hover{background:#fff;border-color:#d68ab2}.drink-badge{color:var(--amber);background:#fbeaf3;border-radius:999px;padding:4px 8px;top:10px;right:10px}.drink-name{color:var(--text)}.drink-card:hover .drink-name{color:var(--amber)}.drink-sizes{color:var(--text3)}.drink-nomilk{color:var(--text4)}.admin-edit{color:var(--amber);background:#fbeaf3}.admin-edit:hover{background:#f5dbe9}.admin-del{color:var(--red);background:#fbe9ec}.admin-del:hover{background:#f4d5dc}.add-drink-btn{color:var(--amber);border-radius:var(--radius-xl);background:#ffffff8c;border-color:#d68ab2}.add-drink-btn:hover{background:#fbeaf3}.no-results{color:var(--text3)}.overlay{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);background:#14312761}.modal{border-color:var(--border);background:#fff;box-shadow:0 25px 70px #173a3033}.modal-head,.modal-foot{border-color:var(--border)}.modal-title{color:var(--amber)}.modal-close{color:var(--text3)}.modal-close:hover{background:var(--bg3);color:var(--text)}.modal-label{color:var(--text2)}.modal-input{border-color:var(--border2);color:var(--text);background:#f8fff9}.modal-input:focus{border-color:#d68ab2;box-shadow:0 0 0 3px #c62b8314}.btn-cancel{border-color:var(--border);background:var(--bg3);color:var(--text2)}.btn-cancel:hover{background:#d5eddf}.btn-confirm{background:var(--amber);color:#fff}.btn-confirm:hover{background:var(--amber-d)}.btn-confirm:disabled{background:var(--bg3);color:var(--text4)}.milk-btn,.size-btn{border-color:var(--border);color:var(--text2);background:#f8fff9}.milk-btn:hover,.size-btn:hover{border-color:var(--border2)}.milk-btn.sel,.size-btn.sel{border-color:var(--amber);background:var(--amber);color:#fff}.size-section{border-color:var(--border);background:#f8fff9}.add-ing-btn,.add-size-btn{color:var(--amber)}.add-size-btn{background:var(--bg3)}.add-size-btn:hover{background:#d5eddf}.milk-toggle{border-color:var(--border);background:#f8fff9}.milk-toggle input{accent-color:var(--amber)}.modal-sub,.rawmat-locked{color:var(--text3)}.prep-badge{color:var(--amber);background:#fbeaf3}.rawmat-list{border-color:var(--border)}.rawmat-add{border-top-color:var(--border)}.link-btn{color:var(--sky)}.link-btn:hover{color:#176b7d}.reset-cat-btn{color:var(--text3)}.reset-cat-btn:hover{color:var(--red)}.cart-fab{background:var(--amber);color:#fff;box-shadow:0 10px 25px #c62b8347}.cart-fab-badge{background:var(--sky)}.cart-backdrop{background:#14312766}.order-panel.open{box-shadow:-10px 0 35px #173a3026}@media (width<=860px){.tabs{flex-wrap:nowrap;padding:12px 12px 10px}.search-bar{padding:14px 12px 12px}.search-bar svg{left:25px}.drink-grid{gap:11px;padding:2px 12px 90px}.drink-card{min-height:112px;padding:18px 10px}}.web-header{border-bottom:1px solid var(--border);background:#fffffff0;justify-content:space-between;align-items:center;gap:16px;min-height:58px;padding:0 22px;display:flex;box-shadow:0 2px 12px #1b4b350a}.web-brand{color:var(--text);align-items:center;gap:10px;font-size:15px;font-weight:750;display:flex}.web-brand svg{color:var(--amber)}.account-tools{justify-content:flex-end;align-items:center;gap:12px;min-width:0;display:flex}.account-email{color:var(--text2);text-overflow:ellipsis;white-space:nowrap;font-size:12px;overflow:hidden}.sync-status{color:var(--text3);white-space:nowrap;align-items:center;gap:6px;font-size:11px;display:inline-flex}.sync-status:before{content:"";background:#48a878;border-radius:50%;width:7px;height:7px}.sync-status.syncing:before{background:#d79b36}.sync-status.error{color:var(--red)}.sync-status.error:before{background:var(--red)}.account-btn{border:1px solid var(--border);color:var(--text2);cursor:pointer;background:#fff;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:700}.account-btn:hover{border-color:var(--border2);background:var(--bg3);color:var(--text)}.auth-screen{background:radial-gradient(ellipse at 18% 12%, #dff7e7 0, transparent 32%), radial-gradient(ellipse at 90% 90%, #f9e8f2 0, transparent 30%), var(--bg);place-items:center;min-height:100vh;padding:28px 16px;display:grid;overflow-y:auto}.auth-card{background:#fffffff0;border:1px solid #d6eadee6;border-radius:24px;width:min(100%,430px);padding:34px;box-shadow:0 24px 70px #173a301f}.auth-brand{color:var(--text);align-items:center;gap:10px;font-size:20px;font-weight:800;display:flex}.auth-brand svg{width:24px;height:24px;color:var(--amber)}.auth-kicker{color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-top:26px;font-size:11px;font-weight:800}.auth-title{color:var(--text);letter-spacing:-.04em;margin-top:7px;font-size:27px}.auth-description{color:var(--text3);margin-top:8px;font-size:13px;line-height:1.6}.auth-form{gap:14px;margin-top:24px;display:grid}.auth-field label{color:var(--text2);margin-bottom:6px;font-size:12px;font-weight:700;display:block}.auth-field input{border:1px solid var(--border);width:100%;color:var(--text);font:inherit;background:#f8fff9;border-radius:11px;outline:none;padding:12px 13px;font-size:14px}.auth-field input:focus{border-color:#d68ab2;box-shadow:0 0 0 3px #c62b8314}.auth-submit{background:var(--amber);color:#fff;cursor:pointer;border:0;border-radius:11px;justify-content:center;align-items:center;gap:8px;min-height:46px;margin-top:3px;font-size:14px;font-weight:750;display:flex}.auth-submit:hover{background:var(--amber-d)}.auth-submit:disabled{opacity:.65;cursor:wait}.auth-switch,.auth-forgot{color:var(--amber);font:inherit;cursor:pointer;background:0 0;border:0;font-size:12px;font-weight:700}.auth-switch{margin:17px auto 0;display:block}.auth-forgot{margin:-3px 0 0 auto;display:block}.auth-forgot:disabled{color:var(--text4);cursor:not-allowed}.auth-message{border-radius:10px;margin-top:14px;padding:10px 12px;font-size:12px;line-height:1.5}.auth-message.error{color:#a52f44;background:#fff4f5;border:1px solid #f2ccd3}.auth-message.notice{border:1px solid var(--border);background:var(--bg);color:var(--text2)}.auth-config-help{border-top:1px solid var(--border);color:var(--text3);margin-top:18px;padding-top:14px;font-size:11px;line-height:1.6}.auth-loading{color:var(--text2);text-align:center;font-size:14px}@media (width<=600px){.web-header{gap:8px;min-height:54px;padding:0 12px}.web-brand{font-size:13px}.account-tools{gap:8px}.account-email{display:none}.sync-status{font-size:10px}.account-btn{padding:7px 10px}.auth-card{border-radius:20px;padding:26px 22px}}</style>
+  <script type="module" crossorigin src="./assets/index-DxQ-eYV9.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+// ===== DATA =====
+const MILK_OPTIONS = ["Full Cream","Skimmed","Oat","Almond","Coconut"];
+
+const BASE_CATEGORIES = [
+  {
+    "label": "Hot Coffee",
+    "icon": "coffee",
+    "drinks": [
+      {
+        "name": "Cappuccino",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              260,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Latte",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              280,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Cortado",
+        "milk": true,
+        "sizes": {
+          "8oz": [
+            [
+              "Milk",
+              150,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Flat White",
+        "milk": true,
+        "sizes": {
+          "8oz": [
+            [
+              "Milk",
+              200,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Macchiato",
+        "milk": true,
+        "sizes": {
+          "4oz": [
+            [
+              "Milk",
+              150,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Americano",
+        "milk": false,
+        "sizes": {
+          "8oz": [
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "White Americano",
+        "milk": true,
+        "sizes": {
+          "8oz": [
+            [
+              "Milk",
+              60,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Spanish Latte",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              35,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              45,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Hot Mocha",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- Hot Chocolate Syrup",
+              45,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Hot Chocolate Syrup",
+              50,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Creme Brulee Latte",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              30,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              10,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "White Mocha",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              45,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              55,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Salted Caramel Latte",
+        "milk": true,
+        "sizes": {
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              45,
+              "g"
+            ]
+          ],
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              55,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Hot Salted Caramel Con Leche",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              350,
+              "ml"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              65,
+              "ml"
+            ],
+            [
+              "BFC- Liquid Whipped Cream",
+              80,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              20,
+              "g"
+            ]
+          ],
+          "12oz": [
+            [
+              "Milk",
+              250,
+              "ml"
+            ],
+            [
+              "BFC- Liquid Whipped Cream",
+              40,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              35,
+              "ml"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Iced Coffee",
+    "icon": "cupsoda",
+    "drinks": [
+      {
+        "name": "Iced Latte",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              190,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Spanish Latte",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              35,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Americano",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Caramel Macchiato",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- French Vanilla Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC- Caramel Sauce",
+              5,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced White Mocha",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              45,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Con Leche",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              120,
+              "g"
+            ],
+            [
+              "BFC- Liquid Whipped Cream",
+              60,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Iced Berry White Mocha",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC - Mixed Burry Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Mocha",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- Hot Chocolate Syrup",
+              45,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Salted Caramel",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              45,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Cinnamon Vanilla",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- Cinnamon Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC- French Vanilla Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Iced Salted Caramel Con Leche",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              120,
+              "g"
+            ],
+            [
+              "BFC- Liquid Whipped Cream",
+              40,
+              "g"
+            ],
+            [
+              "BFC- Salted Caramel Syrup",
+              35,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Iced White Mocha Con Leche",
+        "milk": true,
+        "sizes": {
+          "Ice": [
+            [
+              "Milk",
+              120,
+              "g"
+            ],
+            [
+              "BFC- Liquid Whipped Cream",
+              40,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              45,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      }
+    ]
+  },
+  {
+    "label": "Frappé",
+    "icon": "blend",
+    "drinks": [
+      {
+        "name": "Coffee Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              100,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Mocha Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              80,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- Hot Chocolate Syrup",
+              45,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Caramel Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              80,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "Caramel Syrup",
+              50,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Vanilla Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              80,
+              "g"
+            ],
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ],
+            [
+              "BFC- French Vanilla Syrup",
+              45,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Chocolate Cream Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              150,
+              "g"
+            ],
+            [
+              "BFC- Hot Chocolate Syrup",
+              55,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Caramel Cream Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              150,
+              "g"
+            ],
+            [
+              "Caramel Syrup",
+              50,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Vanilla Cream Frappe",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC- French Vanilla Syrup",
+              45,
+              "g"
+            ],
+            [
+              "Vanilla Powder",
+              30,
+              "g"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Iced Teas & Mojitos",
+    "icon": "glass",
+    "drinks": [
+      {
+        "name": "Pink Lemonade",
+        "milk": false,
+        "sizes": {
+          "Water": [
+            [
+              "BFC- Strawberry Syrup",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Lemonade Base",
+              70,
+              "g"
+            ]
+          ],
+          "Sparkling Water": [
+            [
+              "BFC - Sparkling Water",
+              1,
+              "ml"
+            ],
+            [
+              "BFC- Strawberry Syrup",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Lemonade Base",
+              70,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Mango Iced Tea",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Mango Syrup",
+              70,
+              "g"
+            ],
+            [
+              "BFC- Green Tea (1 pc)",
+              1,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Passionfruit Iced Tea",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC - Passion Fruit Syrup",
+              55,
+              "g"
+            ],
+            [
+              "BFC- Green Tea (1 pc)",
+              1,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Coconut Mango Iced Tea",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Coconut Syrup",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Mango Syrup",
+              40,
+              "g"
+            ],
+            [
+              "BFC- Green Tea (1 pc)",
+              1,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Berry Mint Iced Tea",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC - Mixed Burry Syrup",
+              50,
+              "g"
+            ],
+            [
+              "BFC- Breakfast Red Tea",
+              1,
+              "pcs"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Berry Mojito",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC - Mixed Burry Syrup",
+              45,
+              "g"
+            ],
+            [
+              "BFC- Lemonade Base",
+              5,
+              "g"
+            ],
+            [
+              "BFC - Sparkling Water",
+              1,
+              "g"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Mango Passionfruit Mojito",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Mango Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC - Passion Fruit Syrup",
+              25,
+              "g"
+            ],
+            [
+              "BFC - Sparkling Water",
+              150,
+              "g"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Strawberry Coconut Mojito",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Strawberry Syrup",
+              30,
+              "g"
+            ],
+            [
+              "BFC- Coconut Syrup",
+              20,
+              "g"
+            ],
+            [
+              "BFC - Sparkling Water",
+              150,
+              "g"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "ml"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Matcha & Hojicha",
+    "icon": "leaf",
+    "drinks": [
+      {
+        "name": "Matcha Latte",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Matcha Condensed",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              30,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              30,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Matcha White Chocolate",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Matcha Honey",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Honey Syrup",
+              40,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Honey Syrup",
+              40,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Matcha Cinnamon",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Cinnamon Syrup",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC- Matcha",
+              4,
+              "g"
+            ],
+            [
+              "BFC- Cinnamon Syrup",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Hojicha Salted Maple",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC - Salted Maple Syrup",
+              20,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ],
+            [
+              "BFC - Salted Vanilla Syrup",
+              20,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC - Salted Maple Syrup",
+              20,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ],
+            [
+              "BFC - Salted Vanilla Syrup",
+              10,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Hojicha Apple Spiced",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC - Apple Pie",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC - Apple Pie",
+              35,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Hojicha White Mocha",
+        "milk": true,
+        "sizes": {
+          "Hot": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              40,
+              "g"
+            ],
+            [
+              "Milk",
+              250,
+              "g"
+            ]
+          ],
+          "Ice": [
+            [
+              "BFC - Hojicha",
+              3,
+              "g"
+            ],
+            [
+              "BFC- White Chocolate Syrup",
+              40,
+              "g"
+            ],
+            [
+              "Milk",
+              180,
+              "g"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Add-ons",
+    "icon": "plus",
+    "drinks": [
+      {
+        "name": "Hazelnut Sugar Free Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC - Hazelnut Sugar Free Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Caramel Sugar Free Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC - Caramel Sugar Free Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Salted Caramel Sugar Free Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC - Salted Caramel Sugar Free Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Vanilla Sugar Free Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC - Vanilla Sugar Free Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Honey Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC- Honey Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "White Chocolate Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC- White Chocolate Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Strawberry Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC- Strawberry Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Cinnamon Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC- Cinnamon Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "French Vanilla Syrup",
+        "milk": false,
+        "sizes": {
+          "30ml": [
+            [
+              "BFC- French Vanilla Syrup",
+              30,
+              "ml"
+            ]
+          ]
+        }
+      },
+      {
+        "name": "Ex Shot",
+        "milk": false,
+        "sizes": {
+          "18g": [
+            [
+              "BFC- FP Coffee Blend (1 g)",
+              18,
+              "g"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Otly Drink",
+    "icon": "cupsoda",
+    "drinks": [
+      {
+        "name": "Brazilian Mint Lemonade",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Oat Milk",
+              130,
+              "ml"
+            ],
+            [
+              "BFC- Lemonade Base",
+              50,
+              "g"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "g"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              20,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "Strawberry Refresher",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Oat Milk",
+              150,
+              "ml"
+            ],
+            [
+              "BFC- French Vanilla Syrup",
+              15,
+              "g"
+            ],
+            [
+              "BFC- Strawberry Syrup",
+              40,
+              "g"
+            ],
+            [
+              "BFC- Lemonade Base",
+              30,
+              "g"
+            ]
+          ]
+        },
+        "note": "Shaker"
+      },
+      {
+        "name": "PinaColada",
+        "milk": false,
+        "sizes": {
+          "Ice": [
+            [
+              "BFC- Oat Milk",
+              100,
+              "ml"
+            ],
+            [
+              "BFC- Sweetened Condensed Milk",
+              20,
+              "g"
+            ],
+            [
+              "BFC- Pineapple Syrup",
+              60,
+              "g"
+            ],
+            [
+              "BFC - Mojito Syrup",
+              10,
+              "g"
+            ],
+            [
+              "BFC- Coconut Syrup",
+              20,
+              "g"
+            ]
+          ]
+        },
+        "note": "Blender"
+      }
+    ]
+  },
+  {
+    "label": "Protein",
+    "icon": "leaf",
+    "drinks": [
+      {
+        "name": "Vanilla Figs",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            ["BFC - Vanilla Vigs (1ml)", 50, "g"],
+            ["BFC- Vanilla powder (1 g)", 5, "g"],
+            ["BFC - Whey protein (1ml)", 25, "g"],
+            ["Milk", 170, "g"]
+          ]
+        },
+        "note": "blinder"
+      },
+      {
+        "name": "Banana & Date",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            ["Milk", 120, "g"],
+            ["BFC - Whey protein (1ml)", 25, "g"],
+            ["BFC- Vanilla powder (1 g)", 5, "g"],
+            ["BFC - Banana Dried Fruit (1ml)", 20, "g"],
+            ["BFC - Dates Dried Fruit (1ml)", 30, "g"]
+          ]
+        },
+        "note": "blinder"
+      },
+      {
+        "name": "Coffee Hazelnut Banana",
+        "milk": true,
+        "sizes": {
+          "16oz": [
+            ["Milk", 120, "g"],
+            ["BFC - Whey protein (1ml)", 25, "g"],
+            ["BFC- Vanilla powder (1 g)", 20, "g"],
+            ["BFC - Hazelnut Sugar Free Syrup", 30, "g"],
+            ["BFC - Banana Dried Fruit (1ml)", 20, "g"],
+            ["BFC- FP Coffee Blend (1 g)", 18, "g"]
+          ]
+        },
+        "note": "blinder"
+      }
+    ]
+  }
+];
+
+// ===== ICONS (inline SVG) =====
+const ICONS = {
+  coffee:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2M14 2v2M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 4 4h-1"/><path d="M6 2v2"/></svg>',
+  cupsoda:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4M5 8h14l-1.5 12a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2L5 8z"/></svg>',
+  blend:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h14M5 2v8a7 7 0 0 0 14 0V2M5 22h14"/></svg>',
+  glass:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12l-2 18a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2L6 2z"/><path d="M6.5 8h11"/></svg>',
+  leaf:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-4 3-7 7-7h7v7a7 7 0 0 1-7 7z"/><path d="M11 20c2-4 4-6 7-7"/></svg>',
+  plus:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+  search:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>',
+  shield:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  pencil:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+  trash:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  minus:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+  check:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+  x:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  note:'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5z"/><path d="M15 3v6h6"/></svg>',
+  download:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>',
+};
+
+// ===== RAW MATERIALS (master ingredient list) =====
+// This is the exported catalog, now the canonical starting list for new installs.
+const DEFAULT_RAW_MATERIALS = [
+  ["BFC - Apple Pie", "g"],
+  ["BFC - Aquafina Sparkling Water", "ml"],
+  ["BFC - Banana Syrup", "ml"],
+  ["BFC - Caramel Sugar Free Syrup", "ml"],
+  ["BFC - Hazelnut Sugar Free Syrup", "ml"],
+  ["BFC - Hojicha", "g"],
+  ["BFC - Mixed Burry Syrup", "g"],
+  ["BFC - Mojito Syrup", "g"],
+  ["BFC - Operation Sticker Date", "pcs"],
+  ["BFC - Pasrty Powder", "g"],
+  ["BFC - Passion Fruit Syrup", "g"],
+  ["BFC - Salted Caramel Sugar Free Syrup", "ml"],
+  ["BFC - Salted Maple Syrup", "g"],
+  ["BFC - Salted Vanilla Syrup", "g"],
+  ["BFC - Sparkling Water", "ml"],
+  ["BFC - Vanilla Sugar Free Syrup", "ml"],
+  ["BFC- 12 OZ Hot", "pcs"],
+  ["BFC- 12 OZ Hot Lid", "pcs"],
+  ["BFC- 16 OZ Cup U Shape PP", "pcs"],
+  ["BFC- 16 OZ Hot", "pcs"],
+  ["BFC- 16 OZ Lid U Shape", "pcs"],
+  ["BFC- 16 OZ U Shape PET", "pcs"],
+  ["BFC- 8 OZ Hot", "pcs"],
+  ["BFC- 8 OZ Hot Lid", "pcs"],
+  ["BFC- Almond Milk", "ml"],
+  ["BFC- Breakfast Red Tea", "pcs"],
+  ["BFC- Caramel Sauce", "g"],
+  ["BFC- Chai Syrup", "ml"],
+  ["BFC- Cinnamon Syrup", "g"],
+  ["BFC- Coconut Milk", "ml"],
+  ["BFC- Coconut Syrup", "g"],
+  ["BFC- Condiment Bag", "pcs"],
+  ["BFC- Creamy Coconut Syrup", "ml"],
+  ["BFC- Delivery Tape Roll", "pcs"],
+  ["BFC- FP Coffee Blend (1 g)", "g"],
+  ["BFC- French Vanilla Syrup", "g"],
+  ["BFC- Full Cream Milk", "ml"],
+  ["BFC- Full Cream Milk Bottle", "pcs"],
+  ["BFC- Green Delivery Sticker", "pcs"],
+  ["BFC- Green Tea", "pcs"],
+  ["BFC- Green Tea (1 pc)", "g"],
+  ["BFC- Honey Syrup", "g"],
+  ["BFC- Hot Chocolate Syrup", "g"],
+  ["BFC- Lemonade Base", "g"],
+  ["BFC- Liquid Whipped Cream", "g"],
+  ["BFC- Mango Syrup", "g"],
+  ["BFC- Matcha", "g"],
+  ["BFC- Oat Milk", "ml"],
+  ["BFC- Pineapple Syrup", "g"],
+  ["BFC- Purple Delivery Sticker", "pcs"],
+  ["BFC- Rich Salted Caramel Syrup", "ml"],
+  ["BFC- Salted Caramel Syrup", "g"],
+  ["BFC- Skimmed Milk", "ml"],
+  ["BFC- Skimmed Milk Bottle", "pcs"],
+  ["BFC- Straw", "pcs"],
+  ["BFC- Strawberry Syrup", "g"],
+  ["BFC- Sweetened Condensed Milk", "g"],
+  ["BFC- White Chocolate Syrup", "g"],
+  ["Milk", "g"],
+  ["BFC - Whey protein (1ml)", "ml"],
+  ["BFC - Banana Dried Fruit (1ml)", "ml"],
+  ["BFC - Dates Dried Fruit (1ml)", "ml"],
+  ["BFC - Vanilla Vigs (1ml)", "ml"],
+  ["BFC- Vanilla powder (1 g)", "g"]
+];
+
+function deriveDefaultRawMaterials() {
+  return DEFAULT_RAW_MATERIALS.map(([name, unit]) => ({ name, unit }));
+}
+
+// ===== STATE =====
+let state = {
+  activeCat: 0,
+  order: [],               // the CURRENT user's cart — kept in sync with ordersByUser[currentUser]
+  ordersByUser: {},        // { [userName]: order[] } — each user has their own separate cart
+  currentUser: "",
+  modalDrink: null,
+  search: "",
+  adminMode: false,
+  customDrinks: {},
+  deletedBaseDrinks: {},   // { [catIndex]: [originalDrinkName, ...] } — "removed" default drinks
+  baseOverrides: {},       // { [catIndex]: { [originalDrinkName]: editedDrinkObject } }
+  rawMaterials: [],        // [{name, unit}] — the canonical ingredient list admins pick from
+  rawMaterialsOpen: false,
+  editingDrink: null,
+  editingOrderItem: null,
+  drinkModal: { milk: null, size: "" },
+  editorState: null,
+  orderEditorState: null,
+  cartOpen: false,        // mobile-only: whether the slide-in order panel is shown
+  authUser: null,
+  authLoading: true,
+  authReady: false,
+  authMode: "login",
+  authBusy: false,
+  authEmail: "",
+  authError: "",
+  authNotice: "",
+  authSetupError: "",
+  accountDataReady: false,
+  accountLoadError: "",
+  syncStatus: "saved",
+  syncError: "",
+};
+
+const ORDER_KEY = "breadfastCoffeeOrder"; // legacy single-cart key, migrated below
+const ORDERS_BY_USER_KEY = "breadfastCoffeeOrdersByUser";
+const CURRENT_USER_KEY = "breadfastCoffeeCurrentUser";
+const USERS = ["partinar", "cancel", "calibration"];
+const CUSTOM_DRINKS_KEY = "breadfastCoffeeCustomDrinks";
+const DELETED_BASE_KEY = "breadfastCoffeeDeletedBase";
+const BASE_OVERRIDES_KEY = "breadfastCoffeeBaseOverrides";
+const RAW_MATERIALS_KEY = "breadfastCoffeeRawMaterials";
+const ACCOUNT_CACHE_KEY = "breadfastCoffeeAccountData";
+const LEGACY_MIGRATION_KEY = "breadfastCoffeeLegacyMigrationComplete";
+const ACCOUNT_DOCUMENT_NAME = "state";
+
+let firebaseAuth = null;
+let firebaseDb = null;
+let accountUnsubscribe = null;
+let accountSaveTimer = null;
+
+function accountStorageKey(key, uid = state.authUser?.uid) {
+  return uid ? `${key}::${uid}` : key;
+}
+
+function readStoredValue(key, uid) {
+  try { return localStorage.getItem(accountStorageKey(key, uid)); }
+  catch (error) { console.error(`Couldn't read local data "${key}".`, error); return null; }
+}
+
+function readLegacyStoredValue(key) {
+  try { return localStorage.getItem(key); }
+  catch (error) { console.error(`Couldn't read previous local data "${key}".`, error); return null; }
+}
+
+function writeStoredValue(key, value, uid) {
+  try { localStorage.setItem(accountStorageKey(key, uid), value); return true; }
+  catch (error) { console.error(`Couldn't save local data "${key}".`, error); return false; }
+}
+
+function saveOrdersByUser(v) { writeStoredValue(ORDERS_BY_USER_KEY, JSON.stringify(v)); persistAccountData(); }
+function saveCurrentUser(u) { writeStoredValue(CURRENT_USER_KEY, u); persistAccountData(); }
+// Every existing call site just does saveOrder(newArray) — keep that working
+// unchanged, but file the array under whichever user is currently active.
+function saveOrder(v) {
+  state.order = v;
+  state.ordersByUser = { ...state.ordersByUser, [state.currentUser]: v };
+  saveOrdersByUser(state.ordersByUser);
+}
+function switchUser(u) {
+  if (!USERS.includes(u) || u === state.currentUser) return;
+  state.currentUser = u;
+  saveCurrentUser(u);
+  state.order = state.ordersByUser[u] || [];
+  render();
+}
+function saveCustomDrinks(v) { state.customDrinks = v; writeStoredValue(CUSTOM_DRINKS_KEY, JSON.stringify(v)); persistAccountData(); }
+function saveDeletedBaseDrinks(v) { state.deletedBaseDrinks = v; writeStoredValue(DELETED_BASE_KEY, JSON.stringify(v)); persistAccountData(); }
+function saveBaseOverrides(v) { state.baseOverrides = v; writeStoredValue(BASE_OVERRIDES_KEY, JSON.stringify(v)); persistAccountData(); }
+function saveRawMaterials(v) { state.rawMaterials = v; writeStoredValue(RAW_MATERIALS_KEY, JSON.stringify(v)); persistAccountData(); }
+
+state.ordersByUser = Object.fromEntries(USERS.map(user => [user, []]));
+state.currentUser = USERS[0];
+state.order = [];
+state.customDrinks = {};
+state.deletedBaseDrinks = {};
+state.baseOverrides = {};
+state.rawMaterials = deriveDefaultRawMaterials();
+
+// ===== COMPUTED =====
+function getCategories() {
+  return BASE_CATEGORIES.map((cat, i) => {
+    const deleted = new Set(state.deletedBaseDrinks[i] || []);
+    const overrides = state.baseOverrides[i] || {};
+    const baseDrinks = cat.drinks
+      .filter(d => !deleted.has(d.name))
+      .map(d => {
+        const ov = overrides[d.name];
+        return { ...(ov || d), _isBase: true, _baseKey: d.name };
+      });
+    const baseNames = new Set(baseDrinks.map(d => d.name));
+    // If a drink was added by hand before it later became a default (same
+    // name), don't show it twice — the default one wins, the leftover
+    // custom copy just stays unused in storage instead of duplicating.
+    const customDrinks = (state.customDrinks[i] || [])
+      .filter(d => !baseNames.has(d.name))
+      .map(d => ({ ...d, _isBase: false, _baseKey: null }));
+    return { ...cat, drinks: [...baseDrinks, ...customDrinks] };
+  });
+}
+
+function categoryHasCustomizations(catIndex) {
+  return (state.deletedBaseDrinks[catIndex] || []).length > 0 || Object.keys(state.baseOverrides[catIndex] || {}).length > 0;
+}
+
+function cleanDrink(d) { const { _isBase, _baseKey, ...rest } = d; return rest; }
+
+function getRawMaterials() { return state.rawMaterials; }
+
+function materialOptionsHtml(selected) {
+  const opts = getRawMaterials();
+  return `<option value="" ${!selected?'selected':''} disabled>Select material…</option>` +
+    opts.map(m => `<option value="${m.name}" ${selected===m.name?'selected':''}>${m.name}</option>`).join('');
+}
+
+const MILK_MATERIAL_MAP_KEY = "breadfastCoffeeMilkMaterialMap";
+const DEFAULT_MILK_TO_MATERIAL = {
+  "Full Cream": "BFC- Full Cream Milk",
+  "Skimmed": "BFC- Skimmed Milk",
+  "Oat": "BFC- Oat Milk",
+  "Almond": "BFC- Almond Milk",
+  "Coconut": "BFC- Coconut Milk",
+};
+function saveMilkMaterialMap(v) {
+  MILK_TO_MATERIAL = v;
+  writeStoredValue(MILK_MATERIAL_MAP_KEY, JSON.stringify(v));
+  persistAccountData();
+}
+let MILK_TO_MATERIAL = { ...DEFAULT_MILK_TO_MATERIAL };
+
+function getTotals() {
+  const map = {};
+  for (const item of state.order) {
+    for (const [name, amount, unit] of item.recipe) {
+      let display = name;
+      if (name === "Milk" && item.milk) display = MILK_TO_MATERIAL[item.milk] || (item.milk + " Milk");
+      const key = display + "|" + unit;
+      if (!map[key]) map[key] = { amount: 0, unit };
+      map[key].amount += amount * item.qty;
+    }
+  }
+  return map;
+}
+
+function uid() { return Date.now() + "-" + Math.random().toString(36).slice(2,7); }
+
+// ===== ACTIONS =====
+function openDrink(d) { state.modalDrink = d; const sz = Object.keys(d.sizes); state.drinkModal = { milk: null, size: sz.length === 1 ? sz[0] : "" }; render(); }
+function closeDrinkModal() { state.modalDrink = null; render(); }
+function setDrinkMilk(m) { state.drinkModal.milk = m; render(); }
+function setDrinkSize(s) { state.drinkModal.size = s; render(); }
+
+function confirmAdd() {
+  const d = state.modalDrink; if (!d) return;
+  const { milk, size } = state.drinkModal;
+  const recipe = d.sizes[size];
+  const existing = state.order.find(x => x.name === d.name && x.milk === milk && x.size === size);
+  if (existing) { saveOrder(state.order.map(x => x.id === existing.id ? {...x, qty: x.qty+1} : x)); }
+  else { saveOrder([...state.order, { id: uid(), name: d.name, milk, size, recipe, qty: 1, note: d.note }]); }
+  state.modalDrink = null; render();
+}
+
+function changeQty(id, delta) { saveOrder(state.order.map(x => x.id === id ? {...x, qty: x.qty+delta} : x).filter(x => x.qty > 0)); render(); }
+function removeItem(id) { saveOrder(state.order.filter(x => x.id !== id)); render(); }
+function clearOrder() { if (state.order.length && confirm("Clear the whole order?")) { saveOrder([]); render(); } }
+function newOrder() { if (state.order.length && confirm("Start a new order? Current order will be cleared.")) { saveOrder([]); render(); } }
+
+function exportOrder() {
+  const totals = getTotals();
+  const lines = ["Breadfast Coffee — Recipe Summary","=".repeat(40),"","Drinks:"];
+  for (const item of state.order) lines.push(`  ${item.qty}x ${item.name} (${item.size}${item.milk ? ", " + item.milk : ""})`);
+  lines.push("", "Total Ingredients:", "  " + "—".repeat(36));
+  const sorted = Object.keys(totals).sort();
+  for (const key of sorted) { const {amount, unit} = totals[key]; const name = key.split("|")[0]; lines.push(`  ${name.padEnd(30)} ${String(amount).padStart(6)} ${unit}`); }
+  lines.push("", "Exported: " + new Date().toLocaleString());
+  const blob = new Blob([lines.join("\n")], {type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = `recipe-${Date.now()}.txt`; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Admin actions
+function toggleAdmin() { state.adminMode = !state.adminMode; render(); }
+function setCat(i) { state.activeCat = i; state.search = ""; render(); }
+function setSearch(v) { state.search = v; render(); }
+function toggleCart() { state.cartOpen = !state.cartOpen; render(); }
+
+function openAddDrink() {
+  state.editingDrink = { drink: null, catIndex: state.activeCat, isBase: false, baseKey: null };
+  state.editorState = { name: "", hasMilk: false, note: "", sizes: [{ name: "16oz", ingredients: [["",0,"g"]] }] };
+  render();
+}
+
+function openEditDrink(drink, catIndex, baseKey) {
+  state.editingDrink = { drink, catIndex, isBase: !!baseKey, baseKey: baseKey || null };
+  const sizes = Object.entries(drink.sizes).map(([name, ings]) => ({ name, ingredients: ings.map(i => [...i]) }));
+  state.editorState = { name: drink.name, hasMilk: drink.milk, note: drink.note || "", sizes };
+  render();
+}
+
+function closeDrinkEditor() { state.editingDrink = null; state.editorState = null; render(); }
+
+function edSetName(v) { state.editorState.name = v; render(); }
+function edSetMilk(v) { state.editorState.hasMilk = v; render(); }
+function edSetNote(v) { state.editorState.note = v; render(); }
+function edAddSize() { state.editorState.sizes.push({ name: "", ingredients: [["",0,"g"]] }); render(); }
+function edRemoveSize(si) { if (state.editorState.sizes.length > 1) { state.editorState.sizes.splice(si,1); render(); } }
+function edSetSizeName(si, v) { state.editorState.sizes[si].name = v; render(); }
+function edAddIng(si) { state.editorState.sizes[si].ingredients.push(["",0,"g"]); render(); }
+function edRemoveIng(si, ii) { const ings = state.editorState.sizes[si].ingredients; if (ings.length > 1) { ings.splice(ii,1); render(); } }
+function edUpdateIng(si, ii, field, val) {
+  const ing = state.editorState.sizes[si].ingredients[ii];
+  if (field === 1) ing[1] = Number(val) || 0; else ing[field] = val;
+  render();
+}
+
+function saveDrink() {
+  const st = state.editorState; const ci = state.editingDrink.catIndex;
+  const isBase = state.editingDrink.isBase; const baseKey = state.editingDrink.baseKey;
+  const orig = state.editingDrink.drink?.name || null;
+  const name = st.name.trim(); if (!name) return alert("Drink name is required");
+  const cleanSizes = {};
+  for (const sz of st.sizes) {
+    const sn = sz.name.trim(); if (!sn) return alert("All sizes must have a name");
+    if (cleanSizes[sn]) return alert("Duplicate size: " + sn);
+    const ings = sz.ingredients.filter(i => i[0].trim()).map(i => [i[0].trim(), Number(i[1])||0, i[2]||"g"]);
+    if (!ings.length) return alert("Size " + sn + " needs at least one ingredient");
+    cleanSizes[sn] = ings;
+  }
+  const drink = { name, milk: st.hasMilk, sizes: cleanSizes };
+  if (st.note.trim()) drink.note = st.note.trim();
+
+  if (isBase) {
+    // Editing one of the built-in drinks: store as an override keyed by its
+    // ORIGINAL name so it truly replaces the default instead of duplicating it.
+    const newOverrides = { ...(state.baseOverrides[ci] || {}), [baseKey]: drink };
+    saveBaseOverrides({ ...state.baseOverrides, [ci]: newOverrides });
+  } else {
+    const custom = [...(state.customDrinks[ci] || [])];
+    if (orig) {
+      const idx = custom.findIndex(d => d.name === orig);
+      if (idx >= 0) custom[idx] = drink;
+    } else {
+      const cats = getCategories();
+      if (cats[ci].drinks.some(d => d.name === name)) return alert("A drink with this name already exists");
+      custom.push(drink);
+    }
+    saveCustomDrinks({ ...state.customDrinks, [ci]: custom });
+  }
+  state.editingDrink = null; state.editorState = null; render();
+}
+
+function deleteDrink(catIndex, drinkName, isBase, baseKey) {
+  if (!confirm('Delete "' + drinkName + '"?')) return;
+  if (isBase) {
+    // Soft-delete: hide this default drink from the menu, and drop any
+    // edit override for it so it doesn't linger in storage.
+    const deleted = { ...state.deletedBaseDrinks, [catIndex]: [...new Set([...(state.deletedBaseDrinks[catIndex] || []), baseKey])] };
+    saveDeletedBaseDrinks(deleted);
+    if (state.baseOverrides[catIndex] && state.baseOverrides[catIndex][baseKey]) {
+      const newOverrides = { ...state.baseOverrides[catIndex] };
+      delete newOverrides[baseKey];
+      saveBaseOverrides({ ...state.baseOverrides, [catIndex]: newOverrides });
+    }
+  } else {
+    const custom = (state.customDrinks[catIndex] || []).filter(d => d.name !== drinkName);
+    saveCustomDrinks({ ...state.customDrinks, [catIndex]: custom });
+  }
+  render();
+}
+
+function resetCategoryDefaults(catIndex) {
+  if (!confirm("Restore all default drinks in this category? Your edits/removals here will be undone (custom drinks you added stay).")) return;
+  const deleted = { ...state.deletedBaseDrinks }; delete deleted[catIndex]; saveDeletedBaseDrinks(deleted);
+  const overrides = { ...state.baseOverrides }; delete overrides[catIndex]; saveBaseOverrides(overrides);
+  render();
+}
+
+// Raw materials (master ingredient list) actions
+function openRawMaterials() { state.rawMaterialsOpen = true; render(); }
+function closeRawMaterials() { state.rawMaterialsOpen = false; render(); }
+
+function addRawMaterial(name, unit) {
+  const n = (name || "").trim(); if (!n) return alert("Enter a material name");
+  if (state.rawMaterials.some(m => m.name.toLowerCase() === n.toLowerCase())) return alert("This material already exists");
+  saveRawMaterials([...state.rawMaterials, { name: n, unit: unit === "ml" ? "ml" : "g" }]);
+  render();
+}
+
+function renameRawMaterial(index, newName) {
+  const n = (newName || "").trim(); if (!n) return;
+  const oldName = state.rawMaterials[index].name;
+  if (oldName === n) return;
+  if (state.rawMaterials.some((m, i) => i !== index && m.name.toLowerCase() === n.toLowerCase())) {
+    alert('"' + n + '" already exists in the raw materials list.');
+    render();
+    return;
+  }
+  const list = [...state.rawMaterials]; list[index] = { ...list[index], name: n }; saveRawMaterials(list);
+  cascadeRenameIngredient(oldName, n);
+  render();
+}
+
+// Renaming a raw material must actually update every drink recipe that used
+// the old name — otherwise the drinks silently keep the stale name forever.
+function cascadeRenameIngredient(oldName, newName) {
+  const renameInSizes = (sizes) => {
+    let changed = false;
+    const next = {};
+    for (const [sizeName, ings] of Object.entries(sizes)) {
+      next[sizeName] = ings.map(([n, amt, unit]) => {
+        if (n === oldName) { changed = true; return [newName, amt, unit]; }
+        return [n, amt, unit];
+      });
+    }
+    return { sizes: next, changed };
+  };
+
+  // 1) Drinks the admin added from scratch
+  let anyCustomChanged = false;
+  const nextCustom = { ...state.customDrinks };
+  for (const [ci, drinks] of Object.entries(nextCustom)) {
+    let catChanged = false;
+    const updated = drinks.map(d => {
+      const { sizes, changed } = renameInSizes(d.sizes);
+      if (changed) catChanged = true;
+      return changed ? { ...d, sizes } : d;
+    });
+    if (catChanged) { nextCustom[ci] = updated; anyCustomChanged = true; }
+  }
+  if (anyCustomChanged) saveCustomDrinks(nextCustom);
+
+  // 2) Default drinks that already have an edit override
+  let anyOverrideChanged = false;
+  const nextOverrides = { ...state.baseOverrides };
+  for (const [ci, overrides] of Object.entries(nextOverrides)) {
+    let catChanged = false;
+    const updated = { ...overrides };
+    for (const [origName, d] of Object.entries(overrides)) {
+      const { sizes, changed } = renameInSizes(d.sizes);
+      if (changed) { updated[origName] = { ...d, sizes }; catChanged = true; }
+    }
+    if (catChanged) { nextOverrides[ci] = updated; anyOverrideChanged = true; }
+  }
+
+  // 3) Default drinks that still use the factory recipe untouched — create
+  // an override for them too, so the rename sticks for these as well.
+  BASE_CATEGORIES.forEach((cat, ci) => {
+    const already = nextOverrides[ci] || {};
+    for (const d of cat.drinks) {
+      if (already[d.name]) continue; // handled in step 2
+      const { sizes, changed } = renameInSizes(d.sizes);
+      if (changed) {
+        nextOverrides[ci] = { ...(nextOverrides[ci] || {}), [d.name]: { ...d, sizes } };
+        anyOverrideChanged = true;
+      }
+    }
+  });
+  if (anyOverrideChanged) saveBaseOverrides(nextOverrides);
+
+  // 4) The milk-type name mapping ("Oat" -> "BFC- Oat Milk", etc.)
+  let milkChanged = false;
+  const nextMilkMap = { ...MILK_TO_MATERIAL };
+  for (const [milkType, materialName] of Object.entries(nextMilkMap)) {
+    if (materialName === oldName) { nextMilkMap[milkType] = newName; milkChanged = true; }
+  }
+  if (milkChanged) saveMilkMaterialMap(nextMilkMap);
+}
+
+function setRawMaterialUnit(index, unit) {
+  const list = [...state.rawMaterials]; list[index] = { ...list[index], unit }; saveRawMaterials(list); render();
+}
+
+function deleteRawMaterial(index) {
+  const m = state.rawMaterials[index];
+  if (m.name === "Milk") return alert('"Milk" is required by the milk-picker logic and can\'t be removed.');
+  if (!confirm('Remove "' + m.name + '" from the raw materials list? Existing recipes keep using it, but it will no longer appear when picking ingredients for new/edited recipes.')) return;
+  saveRawMaterials(state.rawMaterials.filter((_, i) => i !== index));
+  render();
+}
+
+// ===== ADMIN DATA EXPORT / IMPORT =====
+// Exports raw materials + every admin customization (added drinks, edited
+// default drinks, removed default drinks) as one JSON file. Categories are
+// keyed by their visible label, not internal index, so the file stays
+// readable and editable by hand.
+function exportData() {
+  const data = {
+    exportedAt: new Date().toISOString(),
+    rawMaterials: state.rawMaterials,
+    customDrinks: {},
+    deletedBaseDrinks: {},
+    baseOverrides: {},
+  };
+  BASE_CATEGORIES.forEach((cat, i) => {
+    if ((state.customDrinks[i] || []).length) data.customDrinks[cat.label] = state.customDrinks[i];
+    if ((state.deletedBaseDrinks[i] || []).length) data.deletedBaseDrinks[cat.label] = state.deletedBaseDrinks[i];
+    if (state.baseOverrides[i] && Object.keys(state.baseOverrides[i]).length) data.baseOverrides[cat.label] = state.baseOverrides[i];
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `breadfast-coffee-data-${Date.now()}.json`; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    let data;
+    try { data = JSON.parse(e.target.result); } catch { return alert("This isn't a valid JSON file."); }
+    if (!data || typeof data !== "object") return alert("This file doesn't contain valid data.");
+
+    if (!confirm("Import this file? Raw materials, added drinks, edits and removals it mentions will be applied. Anything not mentioned in the file stays as it is.")) return;
+
+    const findCatIndex = label => BASE_CATEGORIES.findIndex(c => c.label === label);
+    const skippedLabels = new Set();
+
+    if (Array.isArray(data.rawMaterials)) {
+      const existingNames = new Set();
+      const merged = [];
+      for (const m of data.rawMaterials) {
+        if (!m || !m.name) continue;
+        const unit = ["g", "ml", "pcs"].includes(m.unit) ? m.unit : "g";
+        if (!existingNames.has(m.name)) { existingNames.add(m.name); merged.push({ name: m.name, unit }); }
+      }
+      for (const m of state.rawMaterials) {
+        if (!existingNames.has(m.name)) { existingNames.add(m.name); merged.push(m); }
+      }
+      saveRawMaterials(merged);
+    }
+
+    if (data.customDrinks && typeof data.customDrinks === "object") {
+      const next = { ...state.customDrinks };
+      for (const [label, drinks] of Object.entries(data.customDrinks)) {
+        const ci = findCatIndex(label);
+        if (ci < 0 || !Array.isArray(drinks)) { skippedLabels.add(label); continue; }
+        next[ci] = drinks;
+      }
+      saveCustomDrinks(next);
+    }
+
+    if (data.deletedBaseDrinks && typeof data.deletedBaseDrinks === "object") {
+      const next = { ...state.deletedBaseDrinks };
+      for (const [label, names] of Object.entries(data.deletedBaseDrinks)) {
+        const ci = findCatIndex(label);
+        if (ci < 0 || !Array.isArray(names)) { skippedLabels.add(label); continue; }
+        next[ci] = names;
+      }
+      saveDeletedBaseDrinks(next);
+    }
+
+    if (data.baseOverrides && typeof data.baseOverrides === "object") {
+      const next = { ...state.baseOverrides };
+      for (const [label, overrides] of Object.entries(data.baseOverrides)) {
+        const ci = findCatIndex(label);
+        if (ci < 0 || typeof overrides !== "object") { skippedLabels.add(label); continue; }
+        next[ci] = overrides;
+      }
+      saveBaseOverrides(next);
+    }
+
+    render();
+    alert(skippedLabels.size
+      ? "Imported, but these category names weren't recognized and were skipped: " + [...skippedLabels].join(", ")
+      : "Import complete.");
+  };
+  reader.readAsText(file);
+}
+
+function openEditOrderItem(id) {
+  const item = state.order.find(x => x.id === id); if (!item) return;
+  state.editingOrderItem = item;
+  state.orderEditorState = { name: item.name, size: item.size, milk: item.milk||"", hasMilk: !!item.milk, note: item.note||"", ingredients: item.recipe.map(i => [...i]) };
+  render();
+}
+function closeOrderEditor() { state.editingOrderItem = null; state.orderEditorState = null; render(); }
+function oeSetName(v) { state.orderEditorState.name = v; render(); }
+function oeSetSize(v) { state.orderEditorState.size = v; render(); }
+function oeSetMilk(v) { state.orderEditorState.milk = v; render(); }
+function oeSetHasMilk(v) { state.orderEditorState.hasMilk = v; render(); }
+function oeSetNote(v) { state.orderEditorState.note = v; render(); }
+function oeAddIng() { state.orderEditorState.ingredients.push(["",0,"g"]); render(); }
+function oeRemoveIng(i) { if (state.orderEditorState.ingredients.length > 1) { state.orderEditorState.ingredients.splice(i,1); render(); } }
+function oeUpdateIng(i, field, val) { const ing = state.orderEditorState.ingredients[i]; if (field===1) ing[1]=Number(val)||0; else ing[field]=val; render(); }
+
+function saveOrderItem() {
+  const st = state.orderEditorState; const id = state.editingOrderItem.id;
+  const name = st.name.trim(); if (!name) return alert("Name is required");
+  const size = st.size.trim(); if (!size) return alert("Size is required");
+  const ings = st.ingredients.filter(i => i[0].trim()).map(i => [i[0].trim(), Number(i[1])||0, i[2]||"g"]);
+  if (!ings.length) return alert("At least one ingredient is required");
+  saveOrder(state.order.map(x => x.id === id ? { ...x, name, size, milk: st.hasMilk ? (st.milk.trim()||null) : null, recipe: ings, note: st.note.trim()||undefined } : x));
+  state.editingOrderItem = null; state.orderEditorState = null; render();
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+function renderAuthScreen() {
+  const isRegistering = state.authMode === "register";
+  const error = state.authError || state.authSetupError;
+  return `
+    <main class="auth-screen">
+      <section class="auth-card">
+        <div class="auth-brand">${ICONS.coffee}<span>Breadfast Coffee</span></div>
+        <p class="auth-kicker">Recipe Helper</p>
+        <h1 class="auth-title">${isRegistering ? "Create your account" : "Welcome back"}</h1>
+        <p class="auth-description">Sign in to access your recipes and orders from any device.</p>
+        <form class="auth-form" onsubmit="submitAuthForm(event)">
+          <div class="auth-field">
+            <label for="authEmail">Email address</label>
+            <input id="authEmail" name="email" type="email" autocomplete="email" required value="${escapeHtml(state.authEmail)}" oninput="setAuthEmail(this.value)" />
+          </div>
+          <div class="auth-field">
+            <label for="authPassword">Password</label>
+            <input id="authPassword" name="password" type="password" autocomplete="${isRegistering ? "new-password" : "current-password"}" minlength="6" required />
+          </div>
+          ${isRegistering ? `
+            <div class="auth-field">
+              <label for="authConfirmPassword">Confirm password</label>
+              <input id="authConfirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" required />
+            </div>
+          ` : `
+            <button type="button" class="auth-forgot" onclick="sendPasswordReset()" ${state.authReady ? "" : "disabled"}>Forgot password?</button>
+          `}
+          <button class="auth-submit" type="submit" ${state.authBusy || !state.authReady ? "disabled" : ""}>
+            ${state.authBusy ? "Please wait..." : isRegistering ? "Create account" : "Sign in"}
+          </button>
+        </form>
+        ${error ? `<p class="auth-message error" role="alert">${escapeHtml(error)}</p>` : ""}
+        ${state.authNotice ? `<p class="auth-message notice" role="status">${escapeHtml(state.authNotice)}</p>` : ""}
+        <button class="auth-switch" type="button" onclick="toggleAuthMode()">
+          ${isRegistering ? "Already have an account? Sign in" : "New here? Create an account"}
+        </button>
+        ${state.authSetupError ? `<p class="auth-config-help">Firebase isn't configured yet. Add your Firebase Web App settings to <code>firebase-config.js</code>, then enable Email/Password sign-in in Firebase Authentication.</p>` : ""}
+      </section>
+    </main>
+  `;
+}
+
+function renderAccountLoading() {
+  if (state.accountLoadError) {
+    return `
+      <main class="auth-screen">
+        <section class="auth-card">
+          <div class="auth-brand">${ICONS.coffee}<span>Breadfast Coffee</span></div>
+          <h1 class="auth-title">Couldn't load your account data</h1>
+          <p class="auth-message error" role="alert">${escapeHtml(state.accountLoadError)}</p>
+          <div class="auth-form">
+            <button class="auth-submit" onclick="retryAccountLoad()">Try again</button>
+            <button class="btn-cancel" onclick="signOutAccount()">Sign out</button>
+          </div>
+        </section>
+      </main>
+    `;
+  }
+  return `<main class="auth-screen"><p class="auth-loading">Loading your account data...</p></main>`;
+}
+
+function setAuthEmail(value) {
+  state.authEmail = value;
+}
+
+function toggleAuthMode() {
+  state.authMode = state.authMode === "login" ? "register" : "login";
+  state.authError = "";
+  state.authNotice = "";
+  render();
+}
+
+function getAuthErrorMessage(error) {
+  const messages = {
+    "auth/email-already-in-use": "An account with this email already exists. Sign in instead.",
+    "auth/invalid-email": "Enter a valid email address.",
+    "auth/invalid-credential": "The email or password is incorrect.",
+    "auth/user-not-found": "No account was found for this email.",
+    "auth/wrong-password": "The password is incorrect.",
+    "auth/weak-password": "Choose a password with at least 6 characters.",
+    "auth/too-many-requests": "Too many attempts. Wait a little and try again.",
+    "auth/network-request-failed": "Can't reach Firebase. Check your internet connection and try again.",
+    "auth/operation-not-allowed": "Email/Password sign-in isn't enabled in Firebase Authentication yet.",
+    "permission-denied": "Firebase blocked access to your account data. Check that the Firestore rules are deployed."
+  };
+  return messages[error?.code] || error?.message || "Something went wrong. Please try again.";
+}
+
+async function submitAuthForm(event) {
+  event.preventDefault();
+  if (!firebaseAuth) {
+    state.authError = state.authSetupError || "Firebase isn't configured.";
+    render();
+    return;
+  }
+  const form = event.currentTarget;
+  const formData = new FormData(form);
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "");
+  const confirmPassword = String(formData.get("confirmPassword") || "");
+  if (state.authMode === "register" && password !== confirmPassword) {
+    state.authError = "The passwords don't match.";
+    render();
+    return;
+  }
+  state.authEmail = email;
+  state.authError = "";
+  state.authNotice = "";
+  state.authBusy = true;
+  render();
+  try {
+    if (state.authMode === "register") {
+      await firebaseAuth.createUserWithEmailAndPassword(email, password);
+    } else {
+      await firebaseAuth.signInWithEmailAndPassword(email, password);
+    }
+  } catch (error) {
+    console.error("Firebase sign-in failed.", error);
+    state.authError = getAuthErrorMessage(error);
+  } finally {
+    state.authBusy = false;
+    render();
+  }
+}
+
+async function sendPasswordReset() {
+  if (!firebaseAuth) {
+    state.authError = state.authSetupError || "Firebase isn't configured.";
+    render();
+    return;
+  }
+  const email = state.authEmail.trim();
+  if (!email) {
+    state.authError = "Enter your email address first.";
+    state.authNotice = "";
+    render();
+    return;
+  }
+  state.authBusy = true;
+  state.authError = "";
+  state.authNotice = "";
+  render();
+  try {
+    await firebaseAuth.sendPasswordResetEmail(email);
+    state.authNotice = "Password reset link sent. Check your email.";
+  } catch (error) {
+    console.error("Firebase password reset failed.", error);
+    state.authError = getAuthErrorMessage(error);
+  } finally {
+    state.authBusy = false;
+    render();
+  }
+}
+
+function accountDocument(user = state.authUser) {
+  if (!user || !firebaseDb) throw new Error("Firebase account data isn't available.");
+  return firebaseDb.collection("users").doc(user.uid).collection("appData").doc(ACCOUNT_DOCUMENT_NAME);
+}
+
+function serializeAccountData() {
+  return {
+    schemaVersion: 1,
+    ordersByUser: state.ordersByUser,
+    currentUser: state.currentUser,
+    customDrinks: state.customDrinks,
+    deletedBaseDrinks: state.deletedBaseDrinks,
+    baseOverrides: state.baseOverrides,
+    rawMaterials: state.rawMaterials,
+    milkMaterialMap: MILK_TO_MATERIAL
+  };
+}
+
+function cacheAccountData(data, uid = state.authUser?.uid) {
+  return writeStoredValue(ACCOUNT_CACHE_KEY, JSON.stringify(data), uid);
+}
+
+function applyAccountData(data, uid = state.authUser?.uid) {
+  const source = data && typeof data === "object" ? data : {};
+  const orders = source.ordersByUser && typeof source.ordersByUser === "object" ? source.ordersByUser : {};
+  state.ordersByUser = Object.fromEntries(USERS.map(user => [user, Array.isArray(orders[user]) ? orders[user] : []]));
+  state.currentUser = USERS.includes(source.currentUser) ? source.currentUser : USERS[0];
+  state.order = state.ordersByUser[state.currentUser];
+  state.customDrinks = source.customDrinks && typeof source.customDrinks === "object" ? source.customDrinks : {};
+  state.deletedBaseDrinks = source.deletedBaseDrinks && typeof source.deletedBaseDrinks === "object" ? source.deletedBaseDrinks : {};
+  state.baseOverrides = source.baseOverrides && typeof source.baseOverrides === "object" ? source.baseOverrides : {};
+  state.rawMaterials = Array.isArray(source.rawMaterials) ? source.rawMaterials : deriveDefaultRawMaterials();
+  MILK_TO_MATERIAL = source.milkMaterialMap && typeof source.milkMaterialMap === "object"
+    ? { ...DEFAULT_MILK_TO_MATERIAL, ...source.milkMaterialMap }
+    : { ...DEFAULT_MILK_TO_MATERIAL };
+  const serialized = serializeAccountData();
+  cacheAccountData(serialized, uid);
+  writeStoredValue(ORDERS_BY_USER_KEY, JSON.stringify(state.ordersByUser), uid);
+  writeStoredValue(CURRENT_USER_KEY, state.currentUser, uid);
+  writeStoredValue(CUSTOM_DRINKS_KEY, JSON.stringify(state.customDrinks), uid);
+  writeStoredValue(DELETED_BASE_KEY, JSON.stringify(state.deletedBaseDrinks), uid);
+  writeStoredValue(BASE_OVERRIDES_KEY, JSON.stringify(state.baseOverrides), uid);
+  writeStoredValue(RAW_MATERIALS_KEY, JSON.stringify(state.rawMaterials), uid);
+  writeStoredValue(MILK_MATERIAL_MAP_KEY, JSON.stringify(MILK_TO_MATERIAL), uid);
+}
+
+function readCachedAccountData(uid) {
+  try {
+    const cached = JSON.parse(readStoredValue(ACCOUNT_CACHE_KEY, uid));
+    return cached && typeof cached === "object" ? cached : null;
+  } catch { return null; }
+}
+
+function readLegacyBrowserData() {
+  let hasData = false;
+  for (const key of [ORDERS_BY_USER_KEY, ORDER_KEY, CUSTOM_DRINKS_KEY, DELETED_BASE_KEY, BASE_OVERRIDES_KEY, RAW_MATERIALS_KEY, MILK_MATERIAL_MAP_KEY]) {
+    if (readLegacyStoredValue(key) !== null) { hasData = true; break; }
+  }
+  if (!hasData) return null;
+  let orders = {};
+  let legacyOrder = [];
+  let customDrinks = {};
+  let deletedBaseDrinks = {};
+  let baseOverrides = {};
+  let rawMaterials = deriveDefaultRawMaterials();
+  let milkMaterialMap = { ...DEFAULT_MILK_TO_MATERIAL };
+  try { orders = JSON.parse(readLegacyStoredValue(ORDERS_BY_USER_KEY)) || {}; } catch {}
+  try { legacyOrder = JSON.parse(readLegacyStoredValue(ORDER_KEY)) || []; } catch {}
+  try { customDrinks = JSON.parse(readLegacyStoredValue(CUSTOM_DRINKS_KEY)) || {}; } catch {}
+  try { deletedBaseDrinks = JSON.parse(readLegacyStoredValue(DELETED_BASE_KEY)) || {}; } catch {}
+  try { baseOverrides = JSON.parse(readLegacyStoredValue(BASE_OVERRIDES_KEY)) || {}; } catch {}
+  try {
+    const savedMaterials = JSON.parse(readLegacyStoredValue(RAW_MATERIALS_KEY));
+    if (Array.isArray(savedMaterials)) rawMaterials = savedMaterials;
+  } catch {}
+  try {
+    const savedMap = JSON.parse(readLegacyStoredValue(MILK_MATERIAL_MAP_KEY));
+    if (savedMap && typeof savedMap === "object") milkMaterialMap = { ...milkMaterialMap, ...savedMap };
+  } catch {}
+  const savedCurrentUser = readLegacyStoredValue(CURRENT_USER_KEY);
+  const currentUser = USERS.includes(savedCurrentUser)
+    ? savedCurrentUser
+    : USERS[0];
+  if (!Object.keys(orders).length) orders = { [USERS[0]]: legacyOrder };
+  return { ordersByUser: orders, currentUser, customDrinks, deletedBaseDrinks, baseOverrides, rawMaterials, milkMaterialMap };
+}
+
+function persistAccountData() {
+  if (!state.authUser || !state.accountDataReady) return;
+  const user = state.authUser;
+  const data = serializeAccountData();
+  const cached = cacheAccountData(data, user.uid);
+  if (!cached) {
+    state.syncStatus = "error";
+    state.syncError = "Couldn't save a local backup in this browser.";
+    console.error("Couldn't cache account data in this browser.");
+  } else {
+    state.syncStatus = "syncing";
+    state.syncError = "";
+  }
+  clearTimeout(accountSaveTimer);
+  accountSaveTimer = setTimeout(() => {
+    accountSaveTimer = null;
+    writeAccountData(user, data);
+  }, 350);
+}
+
+async function writeAccountData(user, data = serializeAccountData()) {
+  try {
+    await accountDocument(user).set({
+      ...data,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    if (state.authUser?.uid === user.uid) {
+      state.syncStatus = "saved";
+      state.syncError = "";
+      render();
+    }
+  } catch (error) {
+    console.error("Firebase account data sync failed.", error);
+    if (state.authUser?.uid === user.uid) {
+      state.syncStatus = "error";
+      state.syncError = getAuthErrorMessage(error);
+      render();
+    }
+  }
+}
+
+async function activateAccount(user) {
+  if (accountUnsubscribe) { accountUnsubscribe(); accountUnsubscribe = null; }
+  clearTimeout(accountSaveTimer);
+  state.authUser = user;
+  state.accountDataReady = false;
+  state.accountLoadError = "";
+  state.syncStatus = "syncing";
+  render();
+  const cached = readCachedAccountData(user.uid);
+  let snapshot;
+  try {
+    snapshot = await accountDocument(user).get({ source: "server" });
+  } catch (error) {
+    console.error("Couldn't load this account from Firebase.", error);
+    if (!cached) {
+      state.accountLoadError = getAuthErrorMessage(error);
+      state.syncStatus = "error";
+      render();
+      return;
+    }
+    applyAccountData(cached, user.uid);
+    state.accountDataReady = true;
+    state.syncStatus = "error";
+    state.syncError = "Loaded saved data from this browser; Firebase is currently unavailable.";
+    render();
+    attachAccountListener(user);
+    return;
+  }
+
+  if (snapshot.exists) {
+    applyAccountData(snapshot.data(), user.uid);
+  } else if (cached) {
+    applyAccountData(cached, user.uid);
+  } else {
+    const hasMigratedLegacyData = readLegacyStoredValue(LEGACY_MIGRATION_KEY) === "true";
+    const legacyData = hasMigratedLegacyData ? null : readLegacyBrowserData();
+    if (legacyData) {
+      const shouldMigrate = confirm("This browser has data from the previous version. Copy it into " + (user.email || "this account") + "? Only the account you sign into here will receive this one-time import.");
+      try { localStorage.setItem(LEGACY_MIGRATION_KEY, "true"); }
+      catch (error) { console.error("Couldn't mark legacy data migration as complete.", error); }
+      applyAccountData(shouldMigrate ? legacyData : {});
+    } else {
+      applyAccountData({});
+    }
+  }
+  state.accountDataReady = true;
+  state.authError = "";
+  state.syncStatus = snapshot.metadata.fromCache ? "error" : "saved";
+  state.syncError = snapshot.metadata.fromCache ? "Using saved local data while Firebase reconnects." : "";
+  if (!snapshot.exists && state.syncStatus === "saved") persistAccountData();
+  render();
+  attachAccountListener(user);
+}
+
+function attachAccountListener(user) {
+  if (accountUnsubscribe) accountUnsubscribe();
+  accountUnsubscribe = accountDocument(user).onSnapshot({ includeMetadataChanges: true }, snapshot => {
+    if (state.authUser?.uid !== user.uid || !state.accountDataReady) return;
+    if (snapshot.metadata.hasPendingWrites) return;
+    if (accountSaveTimer) return;
+    if (snapshot.exists) applyAccountData(snapshot.data(), user.uid);
+    state.syncStatus = snapshot.metadata.fromCache ? "error" : "saved";
+    state.syncError = snapshot.metadata.fromCache ? "Using saved local data while Firebase reconnects." : "";
+    render();
+  }, error => {
+    console.error("Firebase account data listener failed.", error);
+    if (state.authUser?.uid === user.uid) {
+      state.syncStatus = "error";
+      state.syncError = getAuthErrorMessage(error);
+      render();
+    }
+  });
+}
+
+async function retryAccountLoad() {
+  if (!state.authUser) return;
+  await activateAccount(state.authUser);
+}
+
+async function signOutAccount() {
+  if (!firebaseAuth) return;
+  const user = state.authUser;
+  if (user && state.accountDataReady) {
+    clearTimeout(accountSaveTimer);
+    accountSaveTimer = null;
+    await Promise.race([
+      writeAccountData(user),
+      new Promise(resolve => setTimeout(resolve, 2000))
+    ]);
+  }
+  if (accountUnsubscribe) { accountUnsubscribe(); accountUnsubscribe = null; }
+  try {
+    await firebaseAuth.signOut();
+    state.authMode = "login";
+    state.authError = "";
+    state.authNotice = "";
+    state.authEmail = "";
+    render();
+  } catch (error) {
+    console.error("Firebase sign-out failed.", error);
+    state.authError = getAuthErrorMessage(error);
+    render();
+  }
+}
+
+function initializeFirebase() {
+  const config = window.FIREBASE_CONFIG;
+  if (!window.firebase) {
+    state.authSetupError = "The Firebase SDK couldn't load. Check the internet connection and reload the page.";
+    state.authLoading = false;
+    render();
+    return;
+  }
+  if (!config || ["apiKey", "authDomain", "projectId", "appId"].some(key => !config[key] || config[key].startsWith("YOUR_"))) {
+    state.authSetupError = "Add your Firebase Web App settings to firebase-config.js.";
+    state.authLoading = false;
+    render();
+    return;
+  }
+  try {
+    const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(config);
+    firebaseAuth = app.auth();
+    firebaseDb = app.firestore();
+    state.authReady = true;
+    firebaseAuth.onAuthStateChanged(async user => {
+      state.authLoading = false;
+      if (!user) {
+        if (accountUnsubscribe) { accountUnsubscribe(); accountUnsubscribe = null; }
+        clearTimeout(accountSaveTimer);
+        state.authUser = null;
+        state.accountDataReady = false;
+        state.accountLoadError = "";
+        state.syncStatus = "saved";
+        render();
+        return;
+      }
+      try {
+        await activateAccount(user);
+      } catch (error) {
+        console.error("Couldn't initialize the Firebase account.", error);
+        state.accountLoadError = getAuthErrorMessage(error);
+        state.syncStatus = "error";
+        render();
+      }
+    }, error => {
+      console.error("Firebase authentication state failed.", error);
+      state.authLoading = false;
+      state.authError = getAuthErrorMessage(error);
+      render();
+    });
+  } catch (error) {
+    console.error("Firebase initialization failed.", error);
+    state.authSetupError = getAuthErrorMessage(error);
+    state.authLoading = false;
+    render();
+  }
+}
+
+// ===== RENDER =====
+function render() {
+  const root = document.getElementById("app");
+  if (state.authLoading) {
+    root.innerHTML = `<main class="auth-screen"><p class="auth-loading">Connecting to your account...</p></main>`;
+    return;
+  }
+  if (state.authUser && !state.accountDataReady) {
+    root.innerHTML = renderAccountLoading();
+    return;
+  }
+  if (!state.authUser) {
+    root.innerHTML = renderAuthScreen();
+    return;
+  }
+  const cats = getCategories();
+  const totals = getTotals();
+  const curCat = cats[state.activeCat];
+  const filtered = state.search.trim() ? curCat.drinks.filter(d => d.name.toLowerCase().includes(state.search.toLowerCase())) : curCat.drinks;
+  const totalDrinks = state.order.reduce((s,x) => s+x.qty, 0);
+  const sortedKeys = Object.keys(totals).sort();
+  const syncLabel = state.syncStatus === "syncing" ? "Saving..."
+    : state.syncStatus === "error" ? "Sync issue"
+      : "Saved to Firebase";
+
+  root.innerHTML = `
+    <div class="app">
+      <header class="web-header">
+        <div class="web-brand">${ICONS.coffee}<span>Breadfast Coffee</span></div>
+        <div class="account-tools">
+          <span class="sync-status ${state.syncStatus === "syncing" ? "syncing" : state.syncStatus === "error" ? "error" : ""}" title="${state.syncStatus === "error" ? escapeHtml(state.syncError || "Your latest changes are saved on this device, but Firebase sync needs attention.") : ""}">${syncLabel}</span>
+          <span class="account-email">${escapeHtml(state.authUser.email || "")}</span>
+          <button class="account-btn" onclick="signOutAccount()">Sign out</button>
+        </div>
+      </header>
+      <div class="main-area">
+        ${renderOrderPanel(totalDrinks, totals, sortedKeys)}
+        ${state.cartOpen ? `<div class="cart-backdrop" onclick="toggleCart()"></div>` : ''}
+        <main class="menu-area">
+          <div class="tabs">
+            ${cats.map((cat,i) => `<button class="tab ${i===state.activeCat?'active':''}" onclick="setCat(${i})">${ICONS[cat.icon]||ICONS.coffee} ${cat.label}</button>`).join("")}
+            ${state.adminMode ? `
+              <button class="admin-btn" onclick="openRawMaterials()" style="margin-left:auto">${ICONS.blend||''} Raw Materials</button>
+              <button class="admin-btn" onclick="exportData()">${ICONS.download||''} Export Data</button>
+              <button class="admin-btn" onclick="document.getElementById('importFileInput').click()">${ICONS.upload||''} Import Data</button>
+              <input type="file" id="importFileInput" accept="application/json" style="display:none" onchange="importData(this.files[0])" />
+            ` : ''}
+            <button class="admin-btn ${state.adminMode?'on':''}" onclick="toggleAdmin()" style="${state.adminMode?'':'margin-left:auto'}">${ICONS.shield} ${state.adminMode?'Admin ON':'Admin'}</button>
+          </div>
+          <div class="search-bar">
+            ${ICONS.search}
+            <input class="search-input" placeholder="Search drinks..." value="${state.search}" oninput="setSearch(this.value)" />
+          </div>
+          <div class="drink-grid">
+            ${state.adminMode ? `<button class="add-drink-btn" onclick="openAddDrink()">${ICONS.plus} Add New Drink to ${curCat.label}</button>` : ""}
+            ${state.adminMode && categoryHasCustomizations(state.activeCat) ? `<button class="reset-cat-btn" style="grid-column:1/-1;text-align:left;margin:-6px 0 4px" onclick="resetCategoryDefaults(${state.activeCat})">↺ Restore default drinks in this category</button>` : ""}
+            ${filtered.map(d => renderDrinkCard(d, state.activeCat)).join("")}
+            ${filtered.length === 0 ? '<p class="no-results">No drinks found</p>' : ''}
+          </div>
+        </main>
+        <button class="cart-fab" onclick="toggleCart()" aria-label="View order">
+          ${ICONS.coffee}
+          ${totalDrinks > 0 ? `<span class="cart-fab-badge">${totalDrinks}</span>` : ''}
+        </button>
+      </div>
+    </div>
+    ${state.modalDrink ? renderDrinkModal() : ''}
+    ${state.editingDrink ? renderDrinkEditor() : ''}
+    ${state.editingOrderItem ? renderOrderItemEditor() : ''}
+    ${state.rawMaterialsOpen && !state.editingDrink && !state.editingOrderItem ? renderRawMaterialsModal() : ''}
+  `;
+}
+
+function renderOrderPanel(totalDrinks, totals, sortedKeys) {
+  return `
+    <aside class="order-panel ${state.cartOpen ? 'open' : ''}">
+      <div class="user-switcher">
+        ${USERS.map(u => `<button class="user-pill ${u===state.currentUser?'active':''}" onclick="switchUser('${u}')">${u}</button>`).join('')}
+        <button class="oi-act-btn cart-close-btn" onclick="toggleCart()">${ICONS.x}</button>
+      </div>
+      <div class="op-header">
+        <span class="op-title">Added Drinks</span>
+        <span class="op-badge">${totalDrinks}</span>
+      </div>
+      <div class="op-list">
+        ${state.order.length === 0 ? '<p class="op-empty">No drinks added yet</p>' : state.order.map(item => `
+          <div class="order-item">
+            <div class="oi-top">
+              <div>
+                <p class="oi-name">${item.name}</p>
+                <p class="oi-sub">${item.size}${item.milk ? ' • ' + item.milk : ''}</p>
+                ${item.note ? `<p class="oi-note">${ICONS.note} ${item.note}</p>` : ''}
+              </div>
+              <div class="oi-actions">
+                ${state.adminMode ? `<button class="oi-act-btn edit" onclick="openEditOrderItem('${item.id}')">${ICONS.pencil}</button>` : ''}
+                <button class="oi-act-btn" onclick="removeItem('${item.id}')">${ICONS.x}</button>
+              </div>
+            </div>
+            <div class="oi-qty">
+              <button class="qty-btn" onclick="changeQty('${item.id}',-1)">${ICONS.minus}</button>
+              <span class="qty-val">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${item.id}',1)">${ICONS.plus}</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="op-totals">
+        <div class="op-totals-header">
+          <span class="op-title">Total Recipe</span>
+          <span style="font-size:10px;color:var(--text4)">${sortedKeys.length} ingredients</span>
+        </div>
+        <div class="totals-box">
+          ${sortedKeys.length === 0 ? '<p class="totals-empty">Choose a drink to start</p>' : sortedKeys.map(key => {
+            const {amount,unit} = totals[key]; const name = key.split('|')[0];
+            return `<div class="total-row"><span class="tn">${name}</span><span class="tv">${amount} ${unit}</span></div>`;
+          }).join('')}
+        </div>
+        <div class="op-actions">
+          <button class="op-btn" onclick="newOrder()">New Order</button>
+          <button class="op-btn" onclick="exportOrder()">${ICONS.download} Export</button>
+          <button class="op-btn danger" onclick="clearOrder()">${ICONS.trash}</button>
+        </div>
+      </div>
+    </aside>
+  `;
+}
+
+function renderDrinkCard(d, catIndex) {
+  const sizes = Object.keys(d.sizes);
+  const sizeStr = sizes.length === 1 ? sizes[0] : sizes.join(' / ');
+  const clean = cleanDrink(d);
+  const cleanJson = JSON.stringify(clean).replace(/"/g,'&quot;');
+  const baseKeyArg = d._isBase ? `'${(d._baseKey||'').replace(/'/g,"\\'")}'` : 'null';
+  if (state.adminMode) {
+    return `
+      <div class="drink-card admin">
+        <span class="drink-name">${d.name}</span>
+        <span class="drink-sizes">${sizeStr}</span>
+        ${d._isBase ? '<span class="rawmat-locked">default drink</span>' : ''}
+        <div class="admin-actions">
+          <button class="admin-edit" onclick="openEditDrink(${cleanJson}, ${catIndex}, ${baseKeyArg})">${ICONS.pencil} Edit</button>
+          <button class="admin-del" onclick="deleteDrink(${catIndex}, '${d.name.replace(/'/g,"\\'")}', ${!!d._isBase}, ${baseKeyArg})">${ICONS.trash} Delete</button>
+        </div>
+      </div>
+    `;
+  }
+  return `
+    <div class="drink-card" onclick="openDrink(${cleanJson})">
+      ${d.note ? `<span class="drink-badge">${d.note}</span>` : ''}
+      <span class="drink-name">${d.name}</span>
+      <span class="drink-sizes">${sizeStr}</span>
+      ${!d.milk ? '<span class="drink-nomilk">No milk</span>' : ''}
+    </div>
+  `;
+}
+
+function renderDrinkModal() {
+  const d = state.modalDrink;
+  const sizes = Object.keys(d.sizes);
+  const isSingle = sizes.length === 1;
+  const dm = state.drinkModal;
+  const canConfirm = (d.milk ? !!dm.milk : true) && !!dm.size;
+  return `
+    <div class="overlay" onclick="closeDrinkModal()">
+      <div class="modal pad" onclick="event.stopPropagation()">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+          <h3 class="modal-title">${d.name}</h3>
+          <span class="modal-sub">${isSingle ? 'Single size • ' + sizes[0] : 'Choose options'}</span>
+        </div>
+        ${d.note ? `<div class="modal-prep"><span class="prep-badge">Prep: ${d.note}</span></div>` : ''}
+        ${d.milk ? `
+          <label class="modal-label">1. Choose Milk</label>
+          <div class="milk-grid">
+            ${MILK_OPTIONS.map(m => `<button class="milk-btn ${dm.milk===m?'sel':''}" onclick="setDrinkMilk('${m}')">${dm.milk===m?ICONS.check:''} ${m}</button>`).join('')}
+          </div>
+        ` : ''}
+        ${!isSingle ? `
+          <label class="modal-label">${d.milk?'2':'1'}. Choose Size</label>
+          <div class="size-grid">
+            ${sizes.map(s => `<button class="size-btn ${dm.size===s?'sel':''}" onclick="setDrinkSize('${s}')">${s}</button>`).join('')}
+          </div>
+        ` : (d.milk ? `<label class="modal-label">Size: <span style="color:var(--amber)">${sizes[0]}</span> (fixed)</label>` : '')}
+        <div class="modal-foot" style="border:0;padding:0;margin-top:16px">
+          <button class="btn-cancel" onclick="closeDrinkModal()">Cancel</button>
+          <button class="btn-confirm" ${canConfirm?'':'disabled'} onclick="confirmAdd()">Add to Recipe</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderDrinkEditor() {
+  const st = state.editorState; const isEdit = !!state.editingDrink.drink;
+  return `
+    <div class="overlay" onclick="closeDrinkEditor()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-head">
+          <h3 class="modal-title">${isEdit ? 'Edit Drink' : 'Add New Drink'}</h3>
+          <button class="modal-close" onclick="closeDrinkEditor()">${ICONS.x}</button>
+        </div>
+        <div class="modal-body">
+          <label class="modal-label">Drink Name</label>
+          <input class="modal-input mb" value="${st.name}" oninput="edSetName(this.value)" placeholder="e.g. Iced Caramel Macchiato" />
+          <label class="modal-label">Prep Note (optional)</label>
+          <input class="modal-input mb" value="${st.note}" oninput="edSetNote(this.value)" placeholder="e.g. Shaker" />
+          <label class="milk-toggle">
+            <input type="checkbox" ${st.hasMilk?'checked':''} onchange="edSetMilk(this.checked)" />
+            <span style="font-size:14px;color:var(--text2)">Contains milk (show milk picker)</span>
+          </label>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span class="modal-label">Sizes & Recipe</span>
+            <button class="add-size-btn" onclick="edAddSize()">${ICONS.plus} Add Size</button>
+          </div>
+          ${st.sizes.map((sz, si) => `
+            <div class="size-section">
+              <div class="size-head">
+                <input class="modal-input" style="flex:1" value="${sz.name}" oninput="edSetSizeName(${si},this.value)" placeholder="Size (e.g. 12oz)" />
+                ${st.sizes.length > 1 ? `<button class="del-size-btn" onclick="edRemoveSize(${si})">${ICONS.trash}</button>` : ''}
+              </div>
+              ${sz.ingredients.map((ing, ii) => `
+                <div class="ing-row">
+                  <select class="modal-input ing-name" style="font-size:12px;padding:6px 8px" onchange="edUpdateIng(${si},${ii},0,this.value)">
+                    ${materialOptionsHtml(ing[0])}
+                  </select>
+                  <input class="modal-input ing-amt" style="font-size:12px;padding:6px 8px" type="number" value="${ing[1]}" oninput="edUpdateIng(${si},${ii},1,this.value)" placeholder="0" />
+                  <select class="modal-input ing-unit" style="font-size:12px;padding:6px 4px" onchange="edUpdateIng(${si},${ii},2,this.value)">
+                    <option value="g" ${ing[2]==='g'?'selected':''}>g</option>
+                    <option value="ml" ${ing[2]==='ml'?'selected':''}>ml</option>
+                    <option value="pcs" ${ing[2]==='pcs'?'selected':''}>pcs</option>
+                  </select>
+                  ${sz.ingredients.length > 1 ? `<button class="ing-del" onclick="edRemoveIng(${si},${ii})">${ICONS.x}</button>` : ''}
+                </div>
+              `).join('')}
+              <button class="add-ing-btn" onclick="edAddIng(${si})">${ICONS.plus} Add ingredient</button>
+            </div>
+          `).join('')}
+          <button class="link-btn" onclick="openRawMaterials()">${ICONS.plus} Missing a raw material? Manage the list</button>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-cancel" onclick="closeDrinkEditor()">Cancel</button>
+          <button class="btn-confirm" onclick="saveDrink()">${isEdit?'Save Changes':'Add Drink'}</button>
+        </div>
+      </div>
+    </div>
+    ${state.rawMaterialsOpen ? renderRawMaterialsModal() : ''}
+  `;
+}
+
+function renderRawMaterialsModal() {
+  const mats = state.rawMaterials;
+  return `
+    <div class="overlay" style="z-index:60" onclick="closeRawMaterials()">
+      <div class="modal pad" onclick="event.stopPropagation()" style="max-width:420px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <h3 class="modal-title">Raw Materials</h3>
+          <button class="modal-close" onclick="closeRawMaterials()">${ICONS.x}</button>
+        </div>
+        <p class="modal-sub" style="margin-bottom:12px">This is the shared ingredient list every drink recipe picks from — pick a material here once, and every drink that uses it will aggregate together correctly in the order totals.</p>
+        <div class="rawmat-list">
+          ${mats.map((m, i) => `
+            <div class="rawmat-row">
+              <input class="modal-input" value="${m.name}" onchange="renameRawMaterial(${i}, this.value)" ${m.name==='Milk'?'disabled':''} />
+              <select class="modal-input rawmat-unit" onchange="setRawMaterialUnit(${i}, this.value)">
+                <option value="g" ${m.unit==='g'?'selected':''}>g</option>
+                <option value="ml" ${m.unit==='ml'?'selected':''}>ml</option>
+                <option value="pcs" ${m.unit==='pcs'?'selected':''}>pcs</option>
+              </select>
+              <button class="ing-del" onclick="deleteRawMaterial(${i})">${ICONS.trash}</button>
+            </div>
+          `).join('')}
+        </div>
+        <div class="rawmat-add">
+          <input class="modal-input" id="newMatName" placeholder="New material name" />
+          <select class="modal-input rawmat-unit" id="newMatUnit">
+            <option value="g">g</option>
+            <option value="ml">ml</option>
+            <option value="pcs">pcs</option>
+          </select>
+          <button class="btn-confirm" style="flex:0 0 auto;padding:10px 14px" onclick="addRawMaterial(document.getElementById('newMatName').value, document.getElementById('newMatUnit').value); document.getElementById('newMatName').value='';">${ICONS.plus} Add</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderOrderItemEditor() {
+  const st = state.orderEditorState;
+  return `
+    <div class="overlay" onclick="closeOrderEditor()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-head">
+          <h3 class="modal-title">Edit Order Item</h3>
+          <button class="modal-close" onclick="closeOrderEditor()">${ICONS.x}</button>
+        </div>
+        <div class="modal-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+            <div><label class="modal-label">Name</label><input class="modal-input" value="${st.name}" oninput="oeSetName(this.value)" /></div>
+            <div><label class="modal-label">Size</label><input class="modal-input" value="${st.size}" oninput="oeSetSize(this.value)" /></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <label class="milk-toggle" style="margin-bottom:0">
+              <input type="checkbox" ${st.hasMilk?'checked':''} onchange="oeSetHasMilk(this.checked)" />
+              <span style="font-size:14px;color:var(--text2)">Milk</span>
+            </label>
+            ${st.hasMilk ? `<input class="modal-input" style="flex:1" value="${st.milk}" oninput="oeSetMilk(this.value)" placeholder="Milk type" />` : ''}
+          </div>
+          <label class="modal-label">Prep Note (optional)</label>
+          <input class="modal-input mb" value="${st.note}" oninput="oeSetNote(this.value)" placeholder="e.g. Shaker" />
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span class="modal-label">Ingredients</span>
+            <button class="add-size-btn" onclick="oeAddIng()">${ICONS.plus} Add</button>
+          </div>
+          ${st.ingredients.map((ing, i) => `
+            <div class="ing-row">
+              <select class="modal-input ing-name" style="font-size:12px;padding:6px 8px" onchange="oeUpdateIng(${i},0,this.value)">
+                ${materialOptionsHtml(ing[0])}
+              </select>
+              <input class="modal-input ing-amt" style="font-size:12px;padding:6px 8px" type="number" value="${ing[1]}" oninput="oeUpdateIng(${i},1,this.value)" placeholder="0" />
+              <select class="modal-input ing-unit" style="font-size:12px;padding:6px 4px" onchange="oeUpdateIng(${i},2,this.value)">
+                <option value="g" ${ing[2]==='g'?'selected':''}>g</option>
+                <option value="ml" ${ing[2]==='ml'?'selected':''}>ml</option>
+                <option value="pcs" ${ing[2]==='pcs'?'selected':''}>pcs</option>
+              </select>
+              ${st.ingredients.length > 1 ? `<button class="ing-del" onclick="oeRemoveIng(${i})">${ICONS.x}</button>` : ''}
+            </div>
+          `).join('')}
+          <button class="link-btn" onclick="openRawMaterials()">${ICONS.plus} Missing a raw material? Manage the list</button>
+        </div>
+        <div class="modal-foot">
+          <button class="btn-cancel" onclick="closeOrderEditor()">Cancel</button>
+          <button class="btn-confirm" onclick="saveOrderItem()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    ${state.rawMaterialsOpen ? renderRawMaterialsModal() : ''}
+  `;
+}
+
+render();
+window.addEventListener("DOMContentLoaded", initializeFirebase, { once: true });
+</script>
+</body>
+</html>
