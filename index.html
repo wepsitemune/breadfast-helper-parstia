@@ -2773,6 +2773,33 @@ function initializeFirebase() {
 // ===== RENDER =====
 function render() {
   const root = document.getElementById("app");
+  const inputSelector = "input, textarea";
+  const inputs = [...root.querySelectorAll(inputSelector)];
+  const activeInputIndex = inputs.indexOf(document.activeElement);
+  let selection = null;
+  if (activeInputIndex >= 0) {
+    try {
+      selection = {
+        start: document.activeElement.selectionStart,
+        end: document.activeElement.selectionEnd,
+        direction: document.activeElement.selectionDirection
+      };
+    } catch {}
+  }
+  renderApp();
+  if (activeInputIndex >= 0) {
+    const replacement = root.querySelectorAll(inputSelector)[activeInputIndex];
+    replacement?.focus({ preventScroll: true });
+    if (selection && selection.start !== null && selection.end !== null) {
+      try {
+        replacement.setSelectionRange(selection.start, selection.end, selection.direction);
+      } catch {}
+    }
+  }
+}
+
+function renderApp() {
+  const root = document.getElementById("app");
   if (state.authLoading) {
     root.innerHTML = `<main class="auth-screen"><p class="auth-loading">Connecting to your account...</p></main>`;
     return;
