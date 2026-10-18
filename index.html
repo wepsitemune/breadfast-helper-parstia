@@ -2436,7 +2436,17 @@ function exportOrder() {
 // Admin actions
 function toggleAdmin() { state.adminMode = !state.adminMode; render(); }
 function setCat(i) { state.activeCat = i; state.search = ""; render(); }
-function setSearch(v) { state.search = v; render(); }
+function setSearch(v) {
+  state.search = v;
+  const grid = document.querySelector(".drink-grid");
+  if (grid) {
+    const curCat = getCategories()[state.activeCat];
+    const filtered = state.search.trim()
+      ? curCat.drinks.filter(d => d.name.toLowerCase().includes(state.search.toLowerCase()))
+      : curCat.drinks;
+    grid.innerHTML = renderDrinkGrid(curCat, filtered);
+  }
+}
 function toggleCart() { state.cartOpen = !state.cartOpen; render(); }
 
 function openAddDrink() {
@@ -2454,18 +2464,17 @@ function openEditDrink(drink, catIndex, baseKey) {
 
 function closeDrinkEditor() { state.editingDrink = null; state.editorState = null; render(); }
 
-function edSetName(v) { state.editorState.name = v; render(); }
+function edSetName(v) { state.editorState.name = v; }
 function edSetMilk(v) { state.editorState.hasMilk = v; render(); }
-function edSetNote(v) { state.editorState.note = v; render(); }
+function edSetNote(v) { state.editorState.note = v; }
 function edAddSize() { state.editorState.sizes.push({ name: "", ingredients: [["",0,"g"]] }); render(); }
 function edRemoveSize(si) { if (state.editorState.sizes.length > 1) { state.editorState.sizes.splice(si,1); render(); } }
-function edSetSizeName(si, v) { state.editorState.sizes[si].name = v; render(); }
+function edSetSizeName(si, v) { state.editorState.sizes[si].name = v; }
 function edAddIng(si) { state.editorState.sizes[si].ingredients.push(["",0,"g"]); render(); }
 function edRemoveIng(si, ii) { const ings = state.editorState.sizes[si].ingredients; if (ings.length > 1) { ings.splice(ii,1); render(); } }
 function edUpdateIng(si, ii, field, val) {
   const ing = state.editorState.sizes[si].ingredients[ii];
   if (field === 1) ing[1] = Number(val) || 0; else ing[field] = val;
-  render();
 }
 
 function saveDrink() {
@@ -2730,14 +2739,14 @@ function openEditOrderItem(id) {
   render();
 }
 function closeOrderEditor() { state.editingOrderItem = null; state.orderEditorState = null; render(); }
-function oeSetName(v) { state.orderEditorState.name = v; render(); }
-function oeSetSize(v) { state.orderEditorState.size = v; render(); }
-function oeSetMilk(v) { state.orderEditorState.milk = v; render(); }
+function oeSetName(v) { state.orderEditorState.name = v; }
+function oeSetSize(v) { state.orderEditorState.size = v; }
+function oeSetMilk(v) { state.orderEditorState.milk = v; }
 function oeSetHasMilk(v) { state.orderEditorState.hasMilk = v; render(); }
-function oeSetNote(v) { state.orderEditorState.note = v; render(); }
+function oeSetNote(v) { state.orderEditorState.note = v; }
 function oeAddIng() { state.orderEditorState.ingredients.push(["",0,"g"]); render(); }
 function oeRemoveIng(i) { if (state.orderEditorState.ingredients.length > 1) { state.orderEditorState.ingredients.splice(i,1); render(); } }
-function oeUpdateIng(i, field, val) { const ing = state.orderEditorState.ingredients[i]; if (field===1) ing[1]=Number(val)||0; else ing[field]=val; render(); }
+function oeUpdateIng(i, field, val) { const ing = state.orderEditorState.ingredients[i]; if (field===1) ing[1]=Number(val)||0; else ing[field]=val; }
 
 function saveOrderItem() {
   const st = state.orderEditorState; const id = state.editingOrderItem.id;
@@ -3265,15 +3274,15 @@ function initializeFirebase() {
 function render() {
   const root = document.getElementById("app");
   if (state.authLoading) {
-    root.innerHTML = `<main class="auth-screen"><p class="auth-loading">Connecting to your account...</p></main>`;
+    updateRootPreservingInput(root, `<main class="auth-screen"><p class="auth-loading">Connecting to your account...</p></main>`);
     return;
   }
   if (state.authUser && !state.accountDataReady) {
-    root.innerHTML = renderAccountLoading();
+    updateRootPreservingInput(root, renderAccountLoading());
     return;
   }
   if (!state.authUser) {
-    root.innerHTML = renderAuthScreen();
+    updateRootPreservingInput(root, renderAuthScreen());
     return;
   }
   const cats = getCategories();
@@ -3286,7 +3295,7 @@ function render() {
     : state.syncStatus === "error" ? "Sync issue"
       : "Saved to Firebase";
 
-  root.innerHTML = `
+  updateRootPreservingInput(root, `
     <div class="app">
       <header class="web-header">
         <div class="web-brand">${ICONS.coffee}<span>Breadfast Coffee</span></div>
@@ -3315,10 +3324,7 @@ function render() {
             <input class="search-input" placeholder="Search drinks..." value="${state.search}" oninput="setSearch(this.value)" />
           </div>
           <div class="drink-grid">
-            ${state.adminMode ? `<button class="add-drink-btn" onclick="openAddDrink()">${ICONS.plus} Add New Drink to ${curCat.label}</button>` : ""}
-            ${state.adminMode && categoryHasCustomizations(state.activeCat) ? `<button class="reset-cat-btn" style="grid-column:1/-1;text-align:left;margin:-6px 0 4px" onclick="resetCategoryDefaults(${state.activeCat})">↺ Restore default drinks in this category</button>` : ""}
-            ${filtered.map(d => renderDrinkCard(d, state.activeCat)).join("")}
-            ${filtered.length === 0 ? '<p class="no-results">No drinks found</p>' : ''}
+            ${renderDrinkGrid(curCat, filtered)}
           </div>
         </main>
         <button class="cart-fab" onclick="toggleCart()" aria-label="View order">
@@ -3331,7 +3337,54 @@ function render() {
     ${state.editingDrink ? renderDrinkEditor() : ''}
     ${state.editingOrderItem ? renderOrderItemEditor() : ''}
     ${state.rawMaterialsOpen && !state.editingDrink && !state.editingOrderItem ? renderRawMaterialsModal() : ''}
+  `);
+}
+
+function renderDrinkGrid(curCat, filtered) {
+  return `
+    ${state.adminMode ? `<button class="add-drink-btn" onclick="openAddDrink()">${ICONS.plus} Add New Drink to ${curCat.label}</button>` : ""}
+    ${state.adminMode && categoryHasCustomizations(state.activeCat) ? `<button class="reset-cat-btn" style="grid-column:1/-1;text-align:left;margin:-6px 0 4px" onclick="resetCategoryDefaults(${state.activeCat})">↺ Restore default drinks in this category</button>` : ""}
+    ${filtered.map(d => renderDrinkCard(d, state.activeCat)).join("")}
+    ${filtered.length === 0 ? '<p class="no-results">No drinks found</p>' : ''}
   `;
+}
+
+function updateRootPreservingInput(root, html) {
+  const active = document.activeElement;
+  const isTextEntry = active && root.contains(active)
+    && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
+  let focus = null;
+  if (isTextEntry) {
+    const matching = [...root.querySelectorAll(active.tagName)]
+      .filter(element => element.className === active.className
+        && element.name === active.name
+        && element.type === active.type);
+    const supportsSelection = active.tagName === "TEXTAREA"
+      || ["text", "search", "url", "tel", "password", "email"].includes(active.type);
+    focus = {
+      id: active.id,
+      className: active.className,
+      name: active.name,
+      type: active.type,
+      index: matching.indexOf(active),
+      selectionStart: supportsSelection ? active.selectionStart : null,
+      selectionEnd: supportsSelection ? active.selectionEnd : null,
+      selectionDirection: supportsSelection ? active.selectionDirection : null
+    };
+  }
+  root.innerHTML = html;
+  if (!focus) return;
+  const candidates = focus.id
+    ? [...root.querySelectorAll("[id]")].filter(element => element.id === focus.id)
+    : [...root.querySelectorAll(isTextEntry.tagName)].filter(element => element.className === focus.className
+      && element.name === focus.name
+      && element.type === focus.type);
+  const replacement = candidates[focus.id ? 0 : focus.index];
+  if (!replacement) return;
+  replacement.focus({ preventScroll: true });
+  if (focus.selectionStart !== null) {
+    replacement.setSelectionRange(focus.selectionStart, focus.selectionEnd, focus.selectionDirection);
+  }
 }
 
 function renderOrderPanel(totalDrinks, totals, sortedKeys) {
