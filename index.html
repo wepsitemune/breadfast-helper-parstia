@@ -104,6 +104,7 @@ body { background: var(--bg); color: var(--text); overflow: hidden; }
 .drink-badge { position: absolute; right: 8px; top: 8px; border-radius: 4px; background: rgba(251,191,36,0.1); padding: 2px 6px; font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--amber); }
 .drink-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .drink-card:hover .drink-name { color: var(--amber); }
+.drink-category { text-transform: uppercase; letter-spacing: .04em; color: var(--amber); font-size: 9px; font-weight: 700; margin-bottom: 6px; }
 .drink-sizes { font-size: 10px; color: var(--text4); margin-top: 6px; }
 .drink-nomilk { font-size: 9px; text-transform: uppercase; color: #3f3f46; margin-top: 4px; }
 .admin-actions { display: flex; gap: 8px; margin-top: 12px; }
@@ -2440,11 +2441,8 @@ function setSearch(v) {
   state.search = v;
   const grid = document.querySelector(".drink-grid");
   if (grid) {
-    const curCat = getCategories()[state.activeCat];
-    const filtered = state.search.trim()
-      ? curCat.drinks.filter(d => d.name.toLowerCase().includes(state.search.toLowerCase()))
-      : curCat.drinks;
-    grid.innerHTML = renderDrinkGrid(curCat, filtered);
+    const categories = getCategories();
+    grid.innerHTML = renderDrinkGrid(categories[state.activeCat], getDrinkGridItems(categories));
   }
 }
 function toggleCart() { state.cartOpen = !state.cartOpen; render(); }
@@ -3288,7 +3286,7 @@ function render() {
   const cats = getCategories();
   const totals = getTotals();
   const curCat = cats[state.activeCat];
-  const filtered = state.search.trim() ? curCat.drinks.filter(d => d.name.toLowerCase().includes(state.search.toLowerCase())) : curCat.drinks;
+  const gridItems = getDrinkGridItems(cats);
   const totalDrinks = state.order.reduce((s,x) => s+x.qty, 0);
   const sortedKeys = Object.keys(totals).sort();
   const syncLabel = state.syncStatus === "syncing" ? "Saving..."
@@ -3324,7 +3322,7 @@ function render() {
             <input class="search-input" placeholder="Search drinks..." value="${state.search}" oninput="setSearch(this.value)" />
           </div>
           <div class="drink-grid">
-            ${renderDrinkGrid(curCat, filtered)}
+            ${renderDrinkGrid(curCat, gridItems)}
           </div>
         </main>
         <button class="cart-fab" onclick="toggleCart()" aria-label="View order">
@@ -3340,12 +3338,27 @@ function render() {
   `);
 }
 
-function renderDrinkGrid(curCat, filtered) {
+function getDrinkGridItems(categories) {
+  const query = state.search.trim().toLowerCase();
+  if (!query) {
+    return categories[state.activeCat].drinks.map(drink => ({
+      drink,
+      catIndex: state.activeCat,
+      categoryLabel: ""
+    }));
+  }
+  return categories.flatMap((category, catIndex) => category.drinks
+    .filter(drink => drink.name.toLowerCase().includes(query))
+    .map(drink => ({ drink, catIndex, categoryLabel: category.label })));
+}
+
+function renderDrinkGrid(curCat, items) {
+  const searching = !!state.search.trim();
   return `
-    ${state.adminMode ? `<button class="add-drink-btn" onclick="openAddDrink()">${ICONS.plus} Add New Drink to ${curCat.label}</button>` : ""}
-    ${state.adminMode && categoryHasCustomizations(state.activeCat) ? `<button class="reset-cat-btn" style="grid-column:1/-1;text-align:left;margin:-6px 0 4px" onclick="resetCategoryDefaults(${state.activeCat})">↺ Restore default drinks in this category</button>` : ""}
-    ${filtered.map(d => renderDrinkCard(d, state.activeCat)).join("")}
-    ${filtered.length === 0 ? '<p class="no-results">No drinks found</p>' : ''}
+    ${state.adminMode && !searching ? `<button class="add-drink-btn" onclick="openAddDrink()">${ICONS.plus} Add New Drink to ${curCat.label}</button>` : ""}
+    ${state.adminMode && !searching && categoryHasCustomizations(state.activeCat) ? `<button class="reset-cat-btn" style="grid-column:1/-1;text-align:left;margin:-6px 0 4px" onclick="resetCategoryDefaults(${state.activeCat})">↺ Restore default drinks in this category</button>` : ""}
+    ${items.map(({ drink, catIndex, categoryLabel }) => renderDrinkCard(drink, catIndex, categoryLabel)).join("")}
+    ${items.length === 0 ? '<p class="no-results">No drinks found</p>' : ''}
   `;
 }
 
@@ -3441,7 +3454,7 @@ function renderOrderPanel(totalDrinks, totals, sortedKeys) {
   `;
 }
 
-function renderDrinkCard(d, catIndex) {
+function renderDrinkCard(d, catIndex, categoryLabel = "") {
   const sizes = Object.keys(d.sizes);
   const sizeStr = sizes.length === 1 ? sizes[0] : sizes.join(' / ');
   const clean = cleanDrink(d);
@@ -3450,6 +3463,7 @@ function renderDrinkCard(d, catIndex) {
   if (state.adminMode) {
     return `
       <div class="drink-card admin">
+        ${categoryLabel ? `<span class="drink-category">${escapeHtml(categoryLabel)}</span>` : ''}
         <span class="drink-name">${d.name}</span>
         <span class="drink-sizes">${sizeStr}</span>
         ${d._isBase ? '<span class="rawmat-locked">default drink</span>' : ''}
@@ -3463,6 +3477,7 @@ function renderDrinkCard(d, catIndex) {
   return `
     <div class="drink-card" onclick="openDrink(${cleanJson})">
       ${d.note ? `<span class="drink-badge">${d.note}</span>` : ''}
+      ${categoryLabel ? `<span class="drink-category">${escapeHtml(categoryLabel)}</span>` : ''}
       <span class="drink-name">${d.name}</span>
       <span class="drink-sizes">${sizeStr}</span>
       ${!d.milk ? '<span class="drink-nomilk">No milk</span>' : ''}
