@@ -2602,6 +2602,7 @@ async function writeAccountData(user, data = serializeAccountData()) {
       state.syncError = "";
       render();
     }
+    return true;
   } catch (error) {
     console.error("Firebase account data sync failed.", error);
     if (state.authUser?.uid === user.uid) {
@@ -2609,6 +2610,7 @@ async function writeAccountData(user, data = serializeAccountData()) {
       state.syncError = getAuthErrorMessage(error);
       render();
     }
+    return false;
   }
 }
 
@@ -2697,10 +2699,18 @@ async function signOutAccount() {
   if (user && state.accountDataReady) {
     clearTimeout(accountSaveTimer);
     accountSaveTimer = null;
-    await Promise.race([
+    let timeoutId;
+    const saved = await Promise.race([
       writeAccountData(user),
-      new Promise(resolve => setTimeout(resolve, 2000))
+      new Promise(resolve => {
+        timeoutId = setTimeout(() => resolve(false), 10000);
+      })
     ]);
+    clearTimeout(timeoutId);
+    if (!saved) {
+      alert("Couldn't confirm that your orders were saved. You're still signed in; check your connection and try again.");
+      return;
+    }
   }
   if (accountUnsubscribe) { accountUnsubscribe(); accountUnsubscribe = null; }
   try {
